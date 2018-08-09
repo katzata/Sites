@@ -1,0 +1,273 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0px;
+	background-color: #EDECEA;
+	letter-spacing: .5px;
+}
+
+header ,footer {
+	position: fixed;
+	width: 100%;
+	background-color: #1C1F20;
+	box-shadow: inset 0 0 3px 4px #EDECEA;
+	color: #EDECEA;
+	font-family: 'Poiret One', cursive;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all .15s linear;
+	opacity: 0;
+}
+
+header {
+	padding-top: 1px;
+	height: 110px;
+	min-height: 77px;
+}
+
+#headFiligreeL ,#headFiligreeR {
+	height: 90%;
+	position: absolute;
+	top: 5px;
+}
+
+#headFiligreeL {
+	left: 2px;
+	transform: rotateZ(90deg);
+}
+
+#headFiligreeR {
+	transform: rotateZ(180deg);
+	right: 2px;
+}
+
+a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+a:visited {
+	color: #FFFFFF;
+}
+
+h1 {
+	font-size: 2.5em;
+	line-height: 50px;
+	text-shadow: 0 0 5px #FFFFFF;
+	margin: auto 20px;
+	text-align: center;
+}
+
+.linkContainerL ,.linkContainerR {
+	width: 20%;
+	height: 95%;
+	min-width: 165px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-around;
+	font-size: 0.9em;
+}
+
+.headerLinkL ,.headerLinkR {
+	position: relative;
+	bottom: -1px;
+	width: 70px;
+	height: 95%; 
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	text-shadow: 0 0 5px #FFFFFF;
+}
+
+.menuFiligree {
+	position: relative;
+	height: 80%;
+	transform: rotateZ(90deg);
+}
+
+.linkText {
+	position: absolute;
+	bottom: 20px;
+	left: 13px;
+	margin: 0;
+}
+
+.linkTextR {
+	position: absolute;
+	bottom: 20px;
+	right: 13px;
+	margin: 0;
+}
+
+footer {
+	height: 9%;
+	bottom: 0px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#footFiligreeL ,#footFiligreeR {
+	height: 85%;
+	position: relative;
+}
+
+#footFiligreeL {
+	left: 5px;
+}
+
+#footFiligreeR {
+	transform: rotateY(180deg);
+	right: 5px;
+}
+
+main {
+	position: fixed;
+	top: 110px;
+	background-image: url(../img/pattern-bg.png);
+	background-size: 100px;
+	width: 100%;
+	height: 78%;
+	color: #1C1F20;
+	overflow: auto;
+	box-shadow: inset 0 0 3px 3px #EDECEA;
+	transition: all .15s linear;
+	opacity: 0;
+}
+
+#upContainer {
+	position: fixed;
+	right: 3%;
+	bottom: 11%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#upFiligree {
+	position: relative;
+	top: 7px;
+	width: 49px;
+	height: 60px;
+	border-radius: 50%;
+	background-color: rgba(235,235,235,.7);
+	box-shadow: 0 0 5px 3px rgba(235,235,235,.9);
+	opacity: 0;
+}
+
+#upArrow {
+	position: absolute;
+	top: 25px;
+	left: 13.5px;
+	width: 22px;
+	height: 33px;
+	opacity: 0;
+}
+
+section {
+	width: 82%;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding-bottom: 30px;
+}
+
+.halfArticle ,.wholeArticle ,.thirdArticle {
+	background-color: #1C1F20;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 0 2px 1px #1C1F20;
+	margin: 50px 0 0;
+	border-radius: 1px;
+}
+
+.thirdArticle {
+	width: 31%;
+}
+
+.halfArticle {
+	width: 48%;
+}
+
+.wholeArticle {
+	width: 100%;
+}
+
+#artTitle {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+h3 {
+	text-align: center;
+	margin-left: 40px;
+	margin-right: 40px;
+	color: #EDECEA;
+	font-family: 'Poiret One', cursive;
+	text-shadow: 0 0 12px #FFFFFF;
+}
+
+#artFiligreeL ,#artFiligreeR {
+	height: 45px;
+	position: absolute;
+}
+
+#artFiligreeL {
+	transform: rotateY(180deg);
+	left: 0px;
+}
+
+#artFiligreeR {
+	right: 0px;
+}
+
+.artInternal {
+	width: 100%;
+	margin: auto auto 0 auto;
+	background-color: #EDECEA;
+	box-shadow: inset 0 0 2px 1px #1C1F20;
+}
+
+.artImgL {
+	float: left;
+	margin: 30px 15px 3px 30px;
+}
+
+.artText {
+	height: 100%;
+	padding: 30px;
+	margin: 0;
+}
+
+@media screen and (max-width: 539px) {
+  	.thirdArticle {
+		width: 100%;
+	}
+
+	.halfArticle {
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 540px) and (max-width: 759px) {
+  	.thirdArticle {
+		width: 100%;
+	}
+
+	.halfArticle {
+		width: 48%;
+	}
+
+	.artInternal {
+		margin: 0;
+		bottom: 0;
+	}
+}
