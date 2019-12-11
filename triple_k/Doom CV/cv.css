@@ -140,6 +140,11 @@ button {
 
 .arrowL, .arrowR {
 	width: 15%;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 }
 
 .arrowL {
@@ -168,5 +173,9 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
 	user-select: none;
 }

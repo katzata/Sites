@@ -210,23 +210,26 @@ const intro = {
 					crack.play();
 					crack.volume = "0.1";
 					intro.mainCrack.style.opacity = "1";
+					
 					introAudio1.pause();
 					introAudio2.pause();
 					intro.logo.style.opacity = "0";
 					intro.logo.style.transform = "skewX(0deg)";
-					intro.logo.style.backgroundSize = "26vh";
+					
+					intro.logo.style.backgroundSize = "25vh";
 					intro.logo.style.backgroundPosition = "center";
 				}
 
-				if (intro.logoSkew == 30) {
+				if (intro.logoSkew == 30) {	
 					clearInterval(skewTimer2);
 					intro.logoSkew = 0;
 					intro.logo.style.transitionTimingFunction = "cubic-bezier(0.5, 1, 1, 1)";
 					intro.logo.style.backgroundPosition = "center center";
-					intro.logo.style.backgroundSize = "34px auto";
-					intro.logo.style.height = "11%";
+					intro.logo.style.backgroundSize = "30px auto";
+					intro.logo.style.height = "10%";
 				}
 			}, 12);
+
 		}, time3);
 		setTimeout(function () {
 			intro.logo.style.transitionDuration = "1.1s";
@@ -401,8 +404,6 @@ const intro = {
 					clearInterval(letter14Timer);
 					intro.textFadeIn6 = 0;
 					document.querySelector("#cv1Embed1").data = "cv_and_cert/cv.pdf";
-					content.hiddenPdf[0].data = "cv_and_cert/itacademy.pdf"
-					content.hiddenPdf[1].data = "cv_and_cert/swift.pdf"
 				}
 			}, delay);
 		}, time14);
@@ -411,7 +412,6 @@ const intro = {
 		setTimeout(function () {
 			let navfadeIn = setInterval(function () {
 				intro.footer.style.height = "4%";
-				intro.footer.style.minHeight = "50px";
 				intro.navFadeIn += 0.02;
 				intro.nav.style.opacity = intro.navFadeIn.toString();
 				content.languageToggle.style.opacity = intro.navFadeIn.toString();
@@ -442,12 +442,10 @@ const intro = {
 						}
 					}, 1000);
 				}
-
 			}, 38);
 		}, time1);
 		setTimeout(function () {
 			intro.main.style.transitionDuration = "2s";
-			intro.main.style.overflowY = "auto";
 			intro.logo.style.userSelect = "auto";
 			content.initialSection.style.opacity = "1";
 			intro.logo.style.zIndex = "1";
@@ -473,7 +471,6 @@ const content = {
 	cvSection1: document.querySelector("#cvSection1"),
 	cvSection2: document.querySelector("#cvSection2"),
 	certificateSection: document.querySelector("#certificateSection"),
-	certificateText: document.querySelectorAll(".certificateText"),
 	hiddenPdf: document.querySelectorAll(".hiddenPdf"),
 	articleDiv: document.querySelectorAll(".articleDiv"),
 	subTitles: document.querySelectorAll(".subTitles"),
@@ -519,7 +516,7 @@ const content = {
 		"Kamen Kamenov Kashchiev",
 		"Sofia, Bulgaria",
 		"Diploma di scuola secondaria superiore",
-		"Da quando ero un adolescente sono stato appassionato dei computer - hardware e software. Un po di anni fa ho deciso di riqualificarmi come developer e ho cominciato di studiare prima da solo e poi tramite corsi. Ho iniziato di lavorare su progetti miei con l'obiettivo di applicare quello che ho imparato e basando mi un po sul modello \"tentativi ed errori\" di sviluppare la mia capacità. Ho creato questo sito come un spazio diverso da GitHub dove posso pubblicare e testare i miei progetti finiti."
+		"Fin da quando ero un adolescente sono stato appassionato dei computer - hardware e software. Un po di anni fa ho deciso di riqualificarmi come developer e ho cominciato di studiare prima da solo e poi tramite corsi. Ho iniziato a lavorare su progetti miei con l'obiettivo di applicare quello che ho imparato e basando mi un po sul modello \"tentativi ed errori\" per sviluppare la mia capacità. Ho creato questo sito come un spazio diverso da GitHub dove posso pubblicare e testare i miei progetti finiti."
 		]
 	],
 	subTitleContent: [],
@@ -684,12 +681,6 @@ const content = {
 			it.style.top = "9px";
 		}
 		this.initialSection.style.transitionDuration = "1.8s";
-	},
-	expandNavItems: function () {
-
-	},
-	shrinkNavItems: function () {
-
 	},
 	getAge: function () {
 		let ageDifMs = Date.now() - new Date(1985, 4, 3).getTime();
@@ -1051,12 +1042,6 @@ window.onmousemove = (mouse) => {
 	}
 };
 
-window.onclick = function () {
-	//alert(content.cv2Embed.contentDocument.querySelector("#controllsContainer"));
-	//alert(content.cvSection2.children.length);
-	//document.querySelector("#age").innerHTML = document.querySelector(".subLinks").offsetLeft;
-};
-
 window.onresize = function(){
 	content.resize();
 };
@@ -1099,8 +1084,18 @@ window.onload = () => {
 
 	for (let x = 0; x < document.querySelectorAll(".certificateHover").length; x++) {
 		document.querySelectorAll(".certificateHover")[x].addEventListener("click", function () {
-			document.querySelectorAll(".pdfContainer")[x].style.opacity = "1";
-			document.querySelectorAll(".pdfContainer")[x].style.zIndex = "0";
+			if (x == 0) {
+				document.querySelector(".hiddenPdf").data = "cv_and_cert/itacademy.pdf";
+			} else if (x == 1) {
+				document.querySelector(".hiddenPdf").data = "cv_and_cert/swift.pdf";
+			} else if (x == 2) {
+				document.querySelector(".hiddenPdf").data = "cv_and_cert/modernJs.pdf";
+			} else if (x == 3) {
+				document.querySelector(".hiddenPdf").data = "cv_and_cert/php.pdf";
+			}
+
+			document.querySelector(".pdfContainer").style.opacity = "1";
+			document.querySelector(".pdfContainer").style.zIndex = "0";
 		});
 	}
 
@@ -1132,15 +1127,17 @@ window.onload = () => {
 			event1 = "click";
 			intro.main.addEventListener("click", function () {
 				content.navItems[x].style.height = "30px";
-				content.navItems[x].children[0].style.bottom = "0px";
-				content.navItems[x].children[0].style.opacity = "0";
-				content.navItems[x].children[1].style.opacity = "0";
+				//content.navItems[x].children[0].style.bottom = "0px";
+				for (let i = 0; i < content.navItems[x].children.length; i++) {
+					content.navItems[x].children[i].style.opacity = "0";
+					content.navItems[x].children[i].style.opacity = "0";
+				}
 
 				setTimeout(function () {					
-					content.navItems[x].children[0].style.display = "none";
-					content.navItems[x].children[1].style.display = "none";
-					content.navItems[x].children[0].style.pointerEvents = "none";
-					content.navItems[x].children[1].style.pointerEvents = "none";
+					for (let i = 0; i < content.navItems[x].children.length; i++) {
+						content.navItems[x].children[i].style.display = "none";
+						content.navItems[x].children[i].style.pointerEvents = "none";
+					}	
 				}, 400)
 			});
 		} else {
@@ -1149,35 +1146,75 @@ window.onload = () => {
 		}
 
 		content.navItems[x].addEventListener(event1, function () {
-			content.navItems[x].children[0].style.display = "inline-block";
-			content.navItems[x].children[1].style.display = "inline-block";
-			content.navItems[x].style.height = "88px";
+			let height = "88px";
+
+			if (x == 0) {
+				height = "100px";
+			} else {
+				height = "88px";
+			}
+
+			for (let i = 0; i < content.navItems[x].children.length; i++) {
+				content.navItems[x].children[i].style.display = "inline-block";
+			}
+
+			content.navItems[x].style.height = height;
 
 			setTimeout(function () {
-				content.navItems[x].children[0].style.bottom = "37px";
 				content.navItems[x].children[0].style.opacity = "1";
+				
+				if (x == 0) {
+					content.navItems[x].children[0].style.bottom = "50px";
+					content.navItems[x].children[1].style.bottom = "28px";
+				} else {
+					content.navItems[x].children[0].style.bottom = "40px";
+					content.navItems[x].children[1].style.bottom = "20px";
+				}
 			}, 5);
 
 			setTimeout(function () {
 				content.navItems[x].children[1].style.opacity = "1";
 				content.navItems[x].children[0].style.pointerEvents = "auto";
 				content.navItems[x].children[1].style.pointerEvents = "auto";
+
+				if (x == 0) {
+					content.navItems[x].children[2].style.opacity = "1";
+					content.navItems[x].children[2].style.pointerEvents = "auto";
+				}
 			}, 15);
 		})
+
 		content.navItems[x].addEventListener(event2, function () {
 			content.navItems[x].style.height = "30px";
-			content.navItems[x].children[0].style.bottom = "0px";
+			content.navItems[x].children[0].style.bottom = "12px";
+			content.navItems[x].children[1].style.bottom = "6px";
 			content.navItems[x].children[0].style.opacity = "0";
 			content.navItems[x].children[1].style.opacity = "0";
 
-			setTimeout(function () {					
-				content.navItems[x].children[0].style.display = "none";
-				content.navItems[x].children[1].style.display = "none";
-				content.navItems[x].children[0].style.pointerEvents = "none";
-				content.navItems[x].children[1].style.pointerEvents = "none";
+			if (x == 0) {
+				content.navItems[x].children[2].style.opacity = "0";
+			}
+
+			setTimeout(function () {
+				for (let i = 0; i < (content.navItems[x].children.length); i++) {
+					content.navItems[x].children[i].style.display = "none";
+					content.navItems[x].children[i].style.pointerEvents = "none";
+				}
 			}, 400)
 		})
 	}
+
+	document.querySelector(".externalLinksContainer").addEventListener("mouseenter", () => {
+		document.querySelector(".externalLinksContainer").style.height = "48px";
+		document.querySelector(".externalLinks").style.opacity = "1";
+		document.querySelector(".externalLinks").style.zIndex = "1";
+	})
+
+	document.querySelector(".externalLinksContainer").addEventListener("mouseleave", () => {
+		document.querySelector(".externalLinksContainer").style.height = "22px";
+		document.querySelector(".externalLinks").style.opacity = "0";
+		document.querySelector(".externalLinks").style.zIndex = "-1";
+	})
 
 	if (navigator.platform == "iPhone") {
 		content.languageToggle.onclick = () => {
@@ -1225,4 +1262,8 @@ window.onload = () => {
 	}
 
 	document.querySelector(".footText").innerHTML = `Copywright © ${new Date().getFullYear()}`
+};
+
+window.onclick = function () {
+	//console.log(document.querySelectorAll(".subItemsL")[2])
 };

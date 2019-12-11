@@ -1345,7 +1345,7 @@ const introTimer = function (time1, time2, time3, time4, time5, time6, time7) {
 		info.go = false;
 		info.creditsDone = true;
 
-		if (navigator.platform == "iPhone") {
+		if (navigator.platform != "Win32" || navigator.platform != "Linux i686") {
 
 			document.querySelector("#controllsContainer").style.display = "flex";
 			document.querySelector("#controllsContainer").style.zIndex = "1";

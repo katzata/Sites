@@ -16,11 +16,11 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-width: 320px;
+	transition-duration: 2s;
 }
 
 header {
 	height: 100%;
-	min-height: 100px;
 	position: relative;
 	display: flex;
 	background-image: url(../img/roza2.png);
@@ -35,7 +35,7 @@ header {
 
 #languageToggle {
 	position: absolute;
-	top: -25px;/*25px*/
+	top: -25px;
 	right: 1px;
 	width: 75px;
 	height: 40px;
@@ -142,7 +142,7 @@ nav {
 	justify-content: flex-start;
 	align-items: center;
 	background-color: black;
-	box-shadow: 0 0 21px 5px black;
+	box-shadow: 0 0 8px 2px black;
 	cursor: default;
 	transition-duration: .4s;
 	padding-top: 4px;
@@ -171,32 +171,52 @@ nav {
 	font-size: .85em;
 	color: #BCBCBC;
 	opacity: 0;
-	pointer-events: none;
 	display: none;
-}
-
-.subItemsL1, .subItemsR1 {
-	bottom: 0;
 	transition-duration: .38s;
+	pointer-events: none;
 }
 
-.subItemsL2, .subItemsR2 {
+.subItemsL1 {
 	bottom: 12px;
-	transition-duration: .38s;
+}
+
+.subItemsL2 {
+	bottom: 6px;
 	z-index: -1;
+}
+
+.subItemsL3 {
+	bottom: 9px;
+	text-align: center;
+	opacity: 1;
+	z-index: 1;
+}
+
+.subItemsR1 {
+	bottom: 7px
+}
+
+.subItemsR2 {
+	bottom: 12px;
 }
 
 .subLinks {
 	height: 16px;
 	transition-duration: .35s;
-	display: inline-block;
-	vertical-align: middle;
-
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .subLinks:hover {
 	color: #FFFFFF;
 	text-shadow: 0px 0px 15px white;
+}
+
+.subLinksL3 {
+	top: 1px;
+	width: 100%;
+	height: 22px;
 }
 
 .subLinksR2 {
@@ -206,6 +226,28 @@ nav {
 
 .subLinksR2:hover {
 	width: 100px;
+}
+
+.externalLinksContainer {
+	position: absolute;
+	width: 100%;
+	box-shadow: 0 0 4px 2px black;
+	transition-duration: .35s;
+	opacity: 1;
+	background-color: black;
+}
+
+.externalLinks {
+	position: absolute;
+	left: 0;
+	bottom: 2px;
+	width: 100%;
+	height: 24px;
+	color: #F8F8F8;
+	transition-duration: .35s;
+	z-index: -1;
+	opacity: 0;
+	padding-top: 2px;
 }
 
 a img {
@@ -352,7 +394,7 @@ p {
 .initialArticle1 {
 	width: 90%;
 	min-height: 280px;
-	margin: 40px auto 0;
+	margin: 40px auto;
 	display: grid;
 	grid-template-columns: auto auto;
 	justify-items: center;
@@ -480,133 +522,31 @@ p {
 	opacity: 1;
 }
 
-/*#controls {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 75px;
-	max-width: 800px;
-}
-
-.directionKeys	{
-	position: relative;
-	width: 20%;
-	height: 100%;
-	min-width: 75px;
-	max-width: 85px;
-	margin-left: 25px;
-}
-
-.crosshairKeys {
-	position: absolute;
-	border: 1px solid white;
-	border-radius: 3px;
-	background-color: #000000;
-	box-shadow: 0 0 10px 10px rgba(0,0,0,0.6);
-}
-
-.leftKey, .rightKey {
-	position: absolute;
-	width: 26px;
-	height: 18px;
-	top: 50%;
-	margin-top: -9px;
-}
-
-.leftKey {
-	border-right: none;
-}
-
-.rightKey {
-	right: 0;
-	border-left: none;
-}
-
-.leftTriangle, .rightTriangle {
-	position: absolute;
-	width: 12px;
-	height: 12px;
-	top: 50%;
-	margin-top: -6px;
-	transform: rotateZ(45deg);
-}
-
-.leftTriangle {
-	right: -6px;
-	border-left: none;
-	border-bottom: none;
-}
-
-.rightTriangle {
-	left: -6px;
-	border-top: none;
-	border-right: none;
-}
-
-.arrows {
-	display: inline-block;
-	position: absolute;
-	margin: 0;
-	top: -2px;
-	height: 5px;
-	user-select: none;
-}
-
-.arrowL {
-	right: 3px;
-}
-
-.arrowR {
-	left: 3px;
-}
-
-#fireContainer {
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 75px;
-	height: 100%;
-	margin-right: 25px;
-	display: flex;
-}
-
-#fire {
-	width: 65px;
-	height: 40px;
-	margin: auto;
-	border-radius: 25%;
-	border: 1px solid white;
-	display: flex;
-	background-color: #000000;
-	box-shadow: 0 0 10px 3px rgba(0,0,0,0.6);
-}
-
-#fireText {
-	margin: auto;
-}*/
-
 /*											RIGHT MENU SECTIONS */
 
 #certificateSection {
 	position: absolute;
 	top: 0;
-	width: 100%;
-	height: 99%;
+	left: 0;
+	width: 103%;
+	height: 100%;
 	padding-right: 17px;
 	background-color: rgba(0,0,0,0.7);
 	transition-duration: 1.4s;
 	opacity: 0;
 	display: none;
+	overflow-y: auto;
 }
 
 #certificateContainer {
 	position: relative;
-	width: 88%;
-	height: 96%;
-	margin: auto;
+	width: 100%;
+	margin: 30px auto;
 	display: flex;
+	flex direction: row;
+	flex-wrap: wrap;
 	justify-content: space-around;
-	align-items: center;
+	
 }
 
 .certificateHover {
@@ -614,7 +554,7 @@ p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: auto 10px;
+	margin: 10px;
 }
 
 .certificates {
@@ -655,7 +595,8 @@ p {
 .pdfContainer {
 	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: 94%;
+	margin: 10px 0;
 	z-index: -1;
 	opacity: 0;
 	transition-duration: .6s;
@@ -666,6 +607,14 @@ p {
 .hiddenPdf {
 	width: 100%;
 	height: 100%;
+	z-index: 1;
+}
+
+@media only screen and (max-width: 600px) {
+	.hiddenPdf {
+		width: 100%;
+		height: 100%;
+	}
 }
 
 .pdfExitContainer {
