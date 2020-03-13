@@ -67,8 +67,7 @@ class Intro {
 		logo.onload = () => {
 			ctx.imageSmoothingEnabled = false;
 			ctx.save();
-			// ctx.translate(-this.logoSize / 2, -((this.logoSize * logo.height) / logo.width) / 2);
-			ctx.drawImage(logo, canvas.width / 2, canvas.height / 2, this.logoSize, this.logoSize * logo.height / logo.width);
+			// ctx.drawImage(logo, canvas.width / 2, canvas.height / 2, this.logoSize, this.logoSize * logo.height / logo.width);
 			ctx.restore();
 		}
 	}
@@ -141,15 +140,12 @@ class Intro {
 					this.logoAlpha = 1;
 				break;
 			}
-
-
 		}
 
 		if (this.mainCounter >= this.distortionStartFrame2 && this.mainCounter <= this.distortionStartFrame2 + 17) {
 	
 			this.logoAlpha = Math.random();
 			whiteNoise.volume = 0.5;
-			
 
 			if (this.mainCounter >= this.distortionStartFrame2 + 3 && this.mainCounter < this.distortionStartFrame2 + 5) {
 				ctx.rotate(22 * Math.PI / 180);
@@ -196,6 +192,10 @@ class Intro {
 			ctx.shadowColor = "rgba(255, 255, 255, 1)";
 			ctx.strokeStyle = "#ffffff";
 
+			let letterWidth = ctx.measureText("M").width;
+			let letterWidth2 = ctx.measureText("K").width;
+			let difference = letterWidth - letterWidth2;
+
 			ctx.shadowOffsetX = this.shadowOffsetAllX;
 			ctx.shadowOffsetY = this.shadowOffsetAllY;
 
@@ -205,8 +205,7 @@ class Intro {
 					this.letterAlpha[0] += this.alphaIncrement;
 				}
 
-				ctx.fillText('K', canvas.width / 2 /*+ this.offsetX */- 194, canvas.height / 2 /*+ this.offsetY*/ + 20);
-				console.log(ctx.measureText("K").width)
+				ctx.fillText('K', canvas.width / 2 - (letterWidth - difference) * 7, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay) {
@@ -214,8 +213,8 @@ class Intro {
 					ctx.globalAlpha = this.letterAlpha[1];
 					this.letterAlpha[1] += this.alphaIncrement;
 				}
-				ctx.fillText('A', canvas.width / 2 /*+ this.offsetX */- 165, canvas.height / 2 /*+ this.offsetY*/ + 20);
-				console.log(ctx.measureText("A").width)
+
+				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference) * 6, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 2) {
@@ -224,7 +223,7 @@ class Intro {
 					this.letterAlpha[2] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('M', canvas.width / 2 /*+ this.offsetX */- 136, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('M', canvas.width / 2 - (letterWidth2 * 5), canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 3) {
@@ -233,7 +232,7 @@ class Intro {
 					this.letterAlpha[3] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('E', canvas.width / 2 /*+ this.offsetX */- 100, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('E', canvas.width / 2 - (letterWidth - difference) * 4 + 8, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 4) {
@@ -242,7 +241,7 @@ class Intro {
 					this.letterAlpha[4] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('N', canvas.width / 2 /*+ this.offsetX */- 76, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('N', canvas.width / 2 - (letterWidth - difference) * 3 + 4, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 5) {
@@ -251,7 +250,7 @@ class Intro {
 					this.letterAlpha[5] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('K', canvas.width / 2 /*+ this.offsetX */- 37, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('K', canvas.width / 2 - (letterWidth - difference) - 6, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 6) {
@@ -260,7 +259,7 @@ class Intro {
 					this.letterAlpha[6] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('A', canvas.width / 2 /*+ this.offsetX */- 7, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference) + 22, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 7) {
@@ -269,7 +268,7 @@ class Intro {
 					this.letterAlpha[7] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('S', canvas.width / 2 /*+ this.offsetX */+ 21, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('S', canvas.width / 2 + (letterWidth - difference) - difference, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 8) {
@@ -278,7 +277,7 @@ class Intro {
 					this.letterAlpha[8] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('H', canvas.width / 2 /*+ this.offsetX */+ 43, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) + 15, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 9) {
@@ -287,7 +286,7 @@ class Intro {
 					this.letterAlpha[9] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('C', canvas.width / 2 /*+ this.offsetX */+ 71, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('C', canvas.width / 2 + (letterWidth - difference) + 43, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 10) {
@@ -296,7 +295,7 @@ class Intro {
 					this.letterAlpha[10] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('H', canvas.width / 2 /*+ this.offsetX */+ 98, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) + 70, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 11) {
@@ -305,7 +304,7 @@ class Intro {
 					this.letterAlpha[11] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('I', canvas.width / 2 /*+ this.offsetX */+ 127, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('I', canvas.width / 2 + (letterWidth - difference) + 100, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 12) {
@@ -314,7 +313,7 @@ class Intro {
 					this.letterAlpha[12] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('E', canvas.width / 2 /*+ this.offsetX */+ 141, canvas.height / 2 /*+ this.offsetY*/ + 20);
+				ctx.fillText('E', canvas.width / 2 + (letterWidth - difference) + 113, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 13) {
@@ -323,11 +322,71 @@ class Intro {
 					this.letterAlpha[13] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('V', canvas.width / 2 /*+ intro.offsetX */+ 164, canvas.height / 2 /*+ intro.offsetY*/ + 20);
+				ctx.fillText('V', canvas.width / 2 + (letterWidth - difference) + 136, canvas.height / 2 + 20);
 			}
 			
 			ctx.restore();
 		}
+	}
+
+	test() {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.save();
+			
+		ctx.font = `${canvas.height / 15}px Rune`;
+		ctx.fillStyle = "black";
+		ctx.textAligh = "center";
+		ctx.textBaseline = "center";
+		ctx.shadowBlur = 10;
+		ctx.shadowColor = "rgba(255, 255, 255, 1)";
+		ctx.strokeStyle = "#ffffff";
+
+		let letterWidth = ctx.measureText("M").width;
+		let letterWidth2 = ctx.measureText("K").width;
+		let difference = letterWidth - letterWidth2;
+
+		// ctx.shadowOffsetX = this.shadowOffsetAllX;
+		// ctx.shadowOffsetY = this.shadowOffsetAllY;
+
+		let initialX = canvas.width / 2;
+		let initialY = canvas.height / 2;
+
+		if (this.mainCounter > this.lettersStartFrame) {
+			if (this.letterAlpha[0] <= 1) {
+				ctx.globalAlpha = this.letterAlpha[0];
+				this.letterAlpha[0] += this.alphaIncrement;
+			}
+		}
+
+		let letters = "KAMEN KASHCHIEV";
+		let lettersWidth = ctx.measureText("KAMEN KASHCHIEV").width;
+		let lettersHeight = ctx.measureText("KAMEN KASHCHIEV").height;
+		// for (let i = 0; i < letters.length; i++) {
+		// 	ctx.fillText(`${letters[i]}`, initalX + (letterWidth - difference) * i, initalY + 20);
+		// }
+
+
+		// ctx.translate(-lettersWidth / 2, lettersHeight / 2)
+		ctx.fillText(`${letters}`, initialX, initialY + 20);
+		// ctx.fillText('K', initalX, initalY + 20);
+		// ctx.fillText('A', initalX + (letterWidth - difference), initalY + 20);
+		// ctx.fillText('M', initalX + (letterWidth2 * 2), initalY + 20);
+		// ctx.fillText('E', initalX + (letterWidth - difference) * 3, initalY + 20);
+		// ctx.fillText('N', canvas.width / 2 - (letterWidth - difference) * 3 + 4, initalY + 20);
+		// ctx.fillText('K', canvas.width / 2 - (letterWidth - difference) - 6, initalY + 20);
+		// ctx.fillText(' ', canvas.width / 2 - (letterWidth - difference) - 6, initalY + 20);
+		// ctx.fillText('A', initialX, initialY + 20);
+		// ctx.fillText('S', canvas.width / 2 + (letterWidth - difference) - difference, initalY + 20);
+		// ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) + 15, initalY + 20);
+		// ctx.fillText('C', canvas.width / 2 + (letterWidth - difference) + 43, initalY + 20);
+		// ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) + 70, initalY + 20);
+		// ctx.fillText('I', canvas.width / 2 + (letterWidth - difference) + 100, initalY + 20);
+		// ctx.fillText('E', canvas.width / 2 + (letterWidth - difference) + 113, initalY + 20);
+		// ctx.fillText('V', canvas.width / 2 + (letterWidth - difference) + 136, initalY + 20);
+		
+		ctx.restore();
 	}
 }
 
@@ -336,383 +395,389 @@ class Intro {
 // 	canvas.height = window.innerHeight;
 // }
 
+
+
 window.onclick = () => {
 	// intro.running = !intro.running;
 	// console.log(ctx)
 }
 
+window.onload = () => {
+
+}
+
 export default Intro;
 
-// const canvas = document.querySelector("canvas");
-// const ctx = canvas.getContext('2d');
+/*const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext('2d');
 
-// let logo = document.createElement("img");
-// logo.src = "img/roza2.png";
-// let name = document.createElement("img");
-// name.src = "img/name.svg";
+let logo = document.createElement("img");
+logo.src = "img/roza2.png";
+let name = document.createElement("img");
+name.src = "img/name.svg";
 
-// let whiteNoise = document.createElement("audio");
-// whiteNoise.src = "audio/static.mp3";
+let whiteNoise = document.createElement("audio");
+whiteNoise.src = "audio/static.mp3";
 
-// const intro = {
-// 	width: window.innerWidth,
-// 	height: window.innerHeight,
-// 	running: true,
-// 	mainCounter: 0,
-// 	offsetX: 0,
-// 	offsetY: 0,
-// 	logoAlpha: 0,
-// 	alphaIncrement: 0.005,
-// 	volume: 0,
-// 	volumeIncrement: 0.005,
-// 	distortionStartFrame1: 100,
-// 	distortionStartFrame2: 170,
-// 	lettersStartFrame: 220,
-// 	lettersDelay: 12,
-// 	shadowBlur: 10,
-// 	shadowBlurLimiter: 6,
-// 	shadowBlurIncrement: 0.2,
-// 	shadowBlurDone: false,
-// 	shadowBlurToggle: true,
-//  	shadowOffsetIncrement: 0.1,
-// 	shadowOffsetLimiter: 2,
-// 	shadowOffsetAllX: 0,
-// 	shadowOffsetAllY: 0,
-// 	shadowOffsetToggleAllX: false,
-// 	shadowOffsetToggleAllY: false,
-// 	shadowOffsetToggleX: [
-// 		false, true, false, true, false, true, false,
-// 		true, false, true, false, true, false, true,
-// 	],
-// 	shadowOffsetToggleY: [
-// 		true, false, true, false, true, false, true,
-// 		false, true, false, true, false, true, false,
-// 	],
-// 	letterAlpha: [
-// 		0, 0, 0, 0, 0, 0, 0,
-// 		0, 0, 0, 0, 0, 0, 0,
-// 	],
-// 	shadowOffsetX: [
-// 		1, 2, 3, 4, 5, 1, 2,
-// 		3, 4, 5, 1, 2, 3, 4,
-// 	],
-//  	shadowOffsetY: [
-// 		0, 0, 0, 0, 0, 0, 0,
-// 		0, 0, 0, 0, 0, 0, 0,
-// 	],
-// 	randomiseOffset () {
-// 		intro.offsetX = -Math.random();
-// 		intro.offsetY = -Math.random();
+const intro = {
+	width: window.innerWidth,
+	height: window.innerHeight,
+	running: true,
+	mainCounter: 0,
+	offsetX: 0,
+	offsetY: 0,
+	logoAlpha: 0,
+	alphaIncrement: 0.005,
+	volume: 0,
+	volumeIncrement: 0.005,
+	distortionStartFrame1: 100,
+	distortionStartFrame2: 170,
+	lettersStartFrame: 220,
+	lettersDelay: 12,
+	shadowBlur: 10,
+	shadowBlurLimiter: 6,
+	shadowBlurIncrement: 0.2,
+	shadowBlurDone: false,
+	shadowBlurToggle: true,
+ 	shadowOffsetIncrement: 0.1,
+	shadowOffsetLimiter: 2,
+	shadowOffsetAllX: 0,
+	shadowOffsetAllY: 0,
+	shadowOffsetToggleAllX: false,
+	shadowOffsetToggleAllY: false,
+	shadowOffsetToggleX: [
+		false, true, false, true, false, true, false,
+		true, false, true, false, true, false, true,
+	],
+	shadowOffsetToggleY: [
+		true, false, true, false, true, false, true,
+		false, true, false, true, false, true, false,
+	],
+	letterAlpha: [
+		0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0,
+	],
+	shadowOffsetX: [
+		1, 2, 3, 4, 5, 1, 2,
+		3, 4, 5, 1, 2, 3, 4,
+	],
+ 	shadowOffsetY: [
+		0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0,
+	],
+	randomiseOffset () {
+		intro.offsetX = -Math.random();
+		intro.offsetY = -Math.random();
 		
-// 		if (intro.mainCounter % 2 === 0) {
-// 			offsetX = -Math.random();
-// 			offsetY = -Math.random();
-// 		} else {
-// 			offsetX = Math.random();
-// 			offsetY = Math.random();
-// 		}
-// 	},
-// 	drawRose: () => {
-// 		ctx.save();
-// 		ctx.translate(-112, -300);
-// 		ctx.drawImage(logo, canvas.width / 2, canvas.height / 2);
-// 		ctx.restore();
+		if (intro.mainCounter % 2 === 0) {
+			offsetX = -Math.random();
+			offsetY = -Math.random();
+		} else {
+			offsetX = Math.random();
+			offsetY = Math.random();
+		}
+	},
+	drawRose: () => {
+		ctx.save();
+		ctx.translate(-112, -300);
+		ctx.drawImage(logo, canvas.width / 2, canvas.height / 2);
+		ctx.restore();
 		
-// 		return ctx;
-// 	},
-// 	drawText: () => {
-// 		if (intro.mainCounter >= intro.lettersStartFrame) {
-// 			ctx.save();
+		return ctx;
+	},
+	drawText: () => {
+		if (intro.mainCounter >= intro.lettersStartFrame) {
+			ctx.save();
 
-// 			if (!intro.shadowBlurDone) {
+			if (!intro.shadowBlurDone) {
 
-// 			}
+			}
 			
-// 			ctx.font = '40px Rune';
-// 			ctx.fillStyle = 'black';
-// 			ctx.textAligh = 'center';
-// 			ctx.textBaseline = 'center';
-// 			ctx.shadowBlur = intro.shadowBlur;
-// 			// ctx.translate(intro.offsetX, intro.offsetY);
-// 			ctx.shadowColor = "rgba(255, 255, 255, 1)";
-// 			ctx.strokeStyle = "#ffffff";
+			ctx.font = '40px Rune';
+			ctx.fillStyle = 'black';
+			ctx.textAligh = 'center';
+			ctx.textBaseline = 'center';
+			ctx.shadowBlur = intro.shadowBlur;
+			// ctx.translate(intro.offsetX, intro.offsetY);
+			ctx.shadowColor = "rgba(255, 255, 255, 1)";
+			ctx.strokeStyle = "#ffffff";
 
-// 			// for (let i = 0; i < intro.shadowOffsetX.length; i++) {
-// 			// 	if (intro.shadowOffsetToggleX[i] === true) {
-// 			// 		intro.shadowOffsetX[i] += intro.shadowOffsetIncrement;
+			// for (let i = 0; i < intro.shadowOffsetX.length; i++) {
+			// 	if (intro.shadowOffsetToggleX[i] === true) {
+			// 		intro.shadowOffsetX[i] += intro.shadowOffsetIncrement;
 					
-// 			// 		if (intro.shadowOffsetX[i] >= intro.shadowOffsetLimiter) {
-// 			// 			intro.shadowOffsetToggleX[i] = false;
-// 			// 		}
-// 			// 	} else {
-// 			// 		intro.shadowOffsetX[i] -= intro.shadowOffsetIncrement;
+			// 		if (intro.shadowOffsetX[i] >= intro.shadowOffsetLimiter) {
+			// 			intro.shadowOffsetToggleX[i] = false;
+			// 		}
+			// 	} else {
+			// 		intro.shadowOffsetX[i] -= intro.shadowOffsetIncrement;
 					
-// 			// 		if (intro.shadowOffsetX[i] <= -intro.shadowOffsetLimiter) {
-// 			// 			intro.shadowOffsetToggleX[i] = !intro.shadowOffsetToggleX[i];
-// 			// 		}
-// 			// 	}
+			// 		if (intro.shadowOffsetX[i] <= -intro.shadowOffsetLimiter) {
+			// 			intro.shadowOffsetToggleX[i] = !intro.shadowOffsetToggleX[i];
+			// 		}
+			// 	}
 
-// 			// 	if (intro.shadowOffsetToggleY[i] === true) {
-// 			// 		intro.shadowOffsetY[i] += intro.shadowOffsetIncrement;
+			// 	if (intro.shadowOffsetToggleY[i] === true) {
+			// 		intro.shadowOffsetY[i] += intro.shadowOffsetIncrement;
 					
-// 			// 		if (intro.shadowOffsetY[i] >= intro.shadowOffsetLimiter) {
-// 			// 			intro.shadowOffsetToggleY[i] = false;
-// 			// 		}
-// 			// 	} else {
-// 			// 		intro.shadowOffsetY[i] -= intro.shadowOffsetIncrement;
+			// 		if (intro.shadowOffsetY[i] >= intro.shadowOffsetLimiter) {
+			// 			intro.shadowOffsetToggleY[i] = false;
+			// 		}
+			// 	} else {
+			// 		intro.shadowOffsetY[i] -= intro.shadowOffsetIncrement;
 					
-// 			// 		if (intro.shadowOffsetY[i] <= -intro.shadowOffsetLimiter) {
-// 			// 			intro.shadowOffsetToggleY[i] = !intro.shadowOffsetToggleY[i];
-// 			// 		}
-// 			// 	}
-// 			// }
+			// 		if (intro.shadowOffsetY[i] <= -intro.shadowOffsetLimiter) {
+			// 			intro.shadowOffsetToggleY[i] = !intro.shadowOffsetToggleY[i];
+			// 		}
+			// 	}
+			// }
 
-// 			intro.mainCounter++;
+			intro.mainCounter++;
 
-// 			ctx.shadowOffsetX = intro.shadowOffsetAllX;
-// 			ctx.shadowOffsetY = intro.shadowOffsetAllY;
+			ctx.shadowOffsetX = intro.shadowOffsetAllX;
+			ctx.shadowOffsetY = intro.shadowOffsetAllY;
 
-// 			if (intro.mainCounter > intro.lettersStartFrame) {
-// 				if (intro.letterAlpha[0] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[0];
-// 					intro.letterAlpha[0] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter > intro.lettersStartFrame) {
+				if (intro.letterAlpha[0] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[0];
+					intro.letterAlpha[0] += intro.alphaIncrement;
+				}
 
-// 				ctx.fillText('K', canvas.width / 2 /*+ intro.offsetX */- 194, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('K', canvas.width / 2 + intro.offsetX - 194, canvas.height / 2 + intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay) {
-// 				if (intro.letterAlpha[1] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[1];
-// 					intro.letterAlpha[1] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay) {
+				if (intro.letterAlpha[1] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[1];
+					intro.letterAlpha[1] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('A', canvas.width / 2 /*+ intro.offsetX */- 165, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('A', canvas.width / 2 + intro.offsetX - 165, canvas.height / 2 + intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 2) {
-// 				if (intro.letterAlpha[2] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[2];
-// 					intro.letterAlpha[2] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 2) {
+				if (intro.letterAlpha[2] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[2];
+					intro.letterAlpha[2] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('M', canvas.width / 2 /*+ intro.offsetX */- 136, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('M', canvas.width / 2 /*+ intro.offsetX - 136, canvas.height / 2 + intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 3) {
-// 				if (intro.letterAlpha[3] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[3];
-// 					intro.letterAlpha[3] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 3) {
+				if (intro.letterAlpha[3] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[3];
+					intro.letterAlpha[3] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('E', canvas.width / 2 /*+ intro.offsetX */- 100, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('E', canvas.width / 2 /*+ intro.offsetX - 100, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 4) {
-// 				if (intro.letterAlpha[4] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[4];
-// 					intro.letterAlpha[4] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 4) {
+				if (intro.letterAlpha[4] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[4];
+					intro.letterAlpha[4] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('N', canvas.width / 2 /*+ intro.offsetX */- 76, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('N', canvas.width / 2 /*+ intro.offsetX - 76, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 5) {
-// 				if (intro.letterAlpha[5] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[5];
-// 					intro.letterAlpha[5] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 5) {
+				if (intro.letterAlpha[5] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[5];
+					intro.letterAlpha[5] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('K', canvas.width / 2 /*+ intro.offsetX */- 37, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('K', canvas.width / 2 /*+ intro.offsetX - 37, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 6) {
-// 				if (intro.letterAlpha[6] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[6];
-// 					intro.letterAlpha[6] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 6) {
+				if (intro.letterAlpha[6] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[6];
+					intro.letterAlpha[6] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('A', canvas.width / 2 /*+ intro.offsetX */- 7, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('A', canvas.width / 2 /*+ intro.offsetX - 7, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 7) {
-// 				if (intro.letterAlpha[7] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[7];
-// 					intro.letterAlpha[7] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 7) {
+				if (intro.letterAlpha[7] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[7];
+					intro.letterAlpha[7] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('S', canvas.width / 2 /*+ intro.offsetX */+ 21, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('S', canvas.width / 2 /*+ intro.offsetX + 21, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 8) {
-// 				if (intro.letterAlpha[8] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[8];
-// 					intro.letterAlpha[8] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 8) {
+				if (intro.letterAlpha[8] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[8];
+					intro.letterAlpha[8] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('H', canvas.width / 2 /*+ intro.offsetX */+ 43, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('H', canvas.width / 2 /*+ intro.offsetX + 43, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 9) {
-// 				if (intro.letterAlpha[9] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[9];
-// 					intro.letterAlpha[9] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 9) {
+				if (intro.letterAlpha[9] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[9];
+					intro.letterAlpha[9] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('C', canvas.width / 2 /*+ intro.offsetX */+ 71, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('C', canvas.width / 2 /*+ intro.offsetX + 71, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 10) {
-// 				if (intro.letterAlpha[10] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[10];
-// 					intro.letterAlpha[10] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 10) {
+				if (intro.letterAlpha[10] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[10];
+					intro.letterAlpha[10] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('H', canvas.width / 2 /*+ intro.offsetX */+ 98, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('H', canvas.width / 2 /*+ intro.offsetX + 98, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 11) {
-// 				if (intro.letterAlpha[11] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[11];
-// 					intro.letterAlpha[11] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 11) {
+				if (intro.letterAlpha[11] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[11];
+					intro.letterAlpha[11] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('I', canvas.width / 2 /*+ intro.offsetX */+ 127, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('I', canvas.width / 2 /*+ intro.offsetX + 127, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 12) {
-// 				if (intro.letterAlpha[12] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[12];
-// 					intro.letterAlpha[12] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 12) {
+				if (intro.letterAlpha[12] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[12];
+					intro.letterAlpha[12] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('E', canvas.width / 2 /*+ intro.offsetX */+ 141, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('E', canvas.width / 2 /*+ intro.offsetX + 141, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 
-// 			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 13) {
-// 				if (intro.letterAlpha[13] <= 1) {
-// 					ctx.globalAlpha = intro.letterAlpha[13];
-// 					intro.letterAlpha[13] += intro.alphaIncrement;
-// 				}
+			if (intro.mainCounter >= intro.lettersStartFrame + intro.lettersDelay * 13) {
+				if (intro.letterAlpha[13] <= 1) {
+					ctx.globalAlpha = intro.letterAlpha[13];
+					intro.letterAlpha[13] += intro.alphaIncrement;
+				}
 				
-// 				ctx.fillText('V', canvas.width / 2 /*+ intro.offsetX */+ 164, canvas.height / 2 /*+ intro.offsetY*/ + 20);
-// 			}
+				ctx.fillText('V', canvas.width / 2 /*+ intro.offsetX + 164, canvas.height / 2 /*+ intro.offsetY + 20);
+			}
 			
-// 			ctx.restore();
-// 		}
-// 	},
-// 	animate: () => {
-// 		intro.mainCounter++;
+			ctx.restore();
+		}
+	},
+	animate: () => {
+		intro.mainCounter++;
 
-// 		// let offsetX = -Math.random();
-// 		// let offsetY = -Math.random();
+		// let offsetX = -Math.random();
+		// let offsetY = -Math.random();
 		
-// 		// if (intro.mainCounter % 2 === 0) {
-// 		// 	offsetX = -Math.random();
-// 		// 	offsetY = -Math.random();
-// 		// } else {
-// 		// 	offsetX = Math.random();
-// 		// 	offsetY = Math.random();
-// 		// }
+		// if (intro.mainCounter % 2 === 0) {
+		// 	offsetX = -Math.random();
+		// 	offsetY = -Math.random();
+		// } else {
+		// 	offsetX = Math.random();
+		// 	offsetY = Math.random();
+		// }
 
-// 		whiteNoise.play();
-// 		whiteNoise.volume = intro.volume;
+		whiteNoise.play();
+		whiteNoise.volume = intro.volume;
 
-// 		intro.volume < 0.22 ? intro.volume += intro.volumeIncrement : null;
+		intro.volume < 0.22 ? intro.volume += intro.volumeIncrement : null;
 
-// 		if (intro.logoAlpha <= 1 && intro.mainCounter <= 100) {
-// 			intro.logoAlpha += intro.alphaIncrement
-// 		}
+		if (intro.logoAlpha <= 1 && intro.mainCounter <= 100) {
+			intro.logoAlpha += intro.alphaIncrement
+		}
 
-// 		// if (intro.logoAlpha <= 1) {
-// 		// 	console.log(intro.mainCounter)
-// 		// }
+		// if (intro.logoAlpha <= 1) {
+		// 	console.log(intro.mainCounter)
+		// }
 
-// 		if (intro.mainCounter >= intro.distortionStartFrame1 && intro.mainCounter < intro.distortionStartFrame1 + 8) {
-// 			offsetX = offsetX * 100;
-// 			offsetY = offsetY * 100;
-// 			whiteNoise.volume = 0.5;
-// 			intro.logoAlpha = Math.random();
+		if (intro.mainCounter >= intro.distortionStartFrame1 && intro.mainCounter < intro.distortionStartFrame1 + 8) {
+			offsetX = offsetX * 100;
+			offsetY = offsetY * 100;
+			whiteNoise.volume = 0.5;
+			intro.logoAlpha = Math.random();
 
-// 			switch (intro.mainCounter) {
-// 				case intro.distortionStartFrame1:
-// 					ctx.transform(1, 0, -.1, 1, 40 + offsetX, 0 + offsetY);
-// 				break;
+			switch (intro.mainCounter) {
+				case intro.distortionStartFrame1:
+					ctx.transform(1, 0, -.1, 1, 40 + offsetX, 0 + offsetY);
+				break;
 
-// 				case intro.distortionStartFrame1 + 1:
-// 					// ctx.transform(1, 0, -.2, 1, 79 + offsetX, 0 + offsetY);
-// 				break;
+				case intro.distortionStartFrame1 + 1:
+					// ctx.transform(1, 0, -.2, 1, 79 + offsetX, 0 + offsetY);
+				break;
 
-// 				case intro.distortionStartFrame1 + 2:
-// 					ctx.transform(1, 0, -.3, 1, 119 + offsetX, 0 + offsetY);
-// 				break;
+				case intro.distortionStartFrame1 + 2:
+					ctx.transform(1, 0, -.3, 1, 119 + offsetX, 0 + offsetY);
+				break;
 
-// 				case intro.distortionStartFrame1 + 3:
-// 					// ctx.transform(1, 0, -.4, 1, 158 + offsetX, 0 + offsetY);
-// 				break;
+				case intro.distortionStartFrame1 + 3:
+					// ctx.transform(1, 0, -.4, 1, 158 + offsetX, 0 + offsetY);
+				break;
 
-// 				case intro.distortionStartFrame1 + 4:
-// 					ctx.transform(1, 0, -.5, 1, 200 + offsetX, 0 + offsetY);
-// 				break;
+				case intro.distortionStartFrame1 + 4:
+					ctx.transform(1, 0, -.5, 1, 200 + offsetX, 0 + offsetY);
+				break;
 
-// 				case intro.distortionStartFrame1 + 5:
-// 					ctx.transform(1, 0, -.6, 1, 238 + offsetX, 0 + offsetY);
-// 				break;
+				case intro.distortionStartFrame1 + 5:
+					ctx.transform(1, 0, -.6, 1, 238 + offsetX, 0 + offsetY);
+				break;
 
-// 				case intro.distortionStartFrame1 + 6:
-// 					// ctx.transform(1, 0, -.5, 1, 200 + offsetX, 0 + offsetY);
-// 				break;
+				case intro.distortionStartFrame1 + 6:
+					// ctx.transform(1, 0, -.5, 1, 200 + offsetX, 0 + offsetY);
+				break;
 
-// 				case intro.distortionStartFrame1 + 7:
-// 					ctx.transform(1, 0, -.4, 1, 158 + offsetX, 0 + offsetY);
-// 					intro.logoAlpha = 1;
-// 				break;
-// 			}
-// 		}
+				case intro.distortionStartFrame1 + 7:
+					ctx.transform(1, 0, -.4, 1, 158 + offsetX, 0 + offsetY);
+					intro.logoAlpha = 1;
+				break;
+			}
+		}
 
-// 		if (intro.mainCounter >= intro.distortionStartFrame2 && intro.mainCounter <= intro.distortionStartFrame2 + 17) {
+		if (intro.mainCounter >= intro.distortionStartFrame2 && intro.mainCounter <= intro.distortionStartFrame2 + 17) {
 	
-// 			intro.logoAlpha = Math.random();
-// 			whiteNoise.volume = 0.5;
+			intro.logoAlpha = Math.random();
+			whiteNoise.volume = 0.5;
 
-// 			if (intro.mainCounter >= intro.distortionStartFrame2 + 3 && intro.mainCounter < intro.distortionStartFrame2 + 5) {
-// 				ctx.rotate(22 * Math.PI / 180);
-// 				ctx.transform(1, 0, .5, 1.3, -200 + offsetX * 5, -220 + offsetY * 5);
-// 			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 5 && intro.mainCounter < intro.distortionStartFrame2 + 7) {
-// 				ctx.rotate(22 * Math.PI / 180);
-// 				ctx.transform(1, 0, .5, 1.3, -55 + offsetX * 5, -220 + offsetY * 5);
-// 			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 7 && intro.mainCounter < intro.distortionStartFrame2 + 9) {
-// 				ctx.rotate(22 * Math.PI / 180);
-// 				ctx.transform(1, 0, .5, 1.3, -77 + offsetX * 5, -268 + offsetY * 5);
-// 			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 9 && intro.mainCounter < intro.distortionStartFrame2 + 11) {
-// 				ctx.rotate(0 * Math.PI / 180);
-// 				ctx.transform(1, 0, 0, 1, 0 + offsetX * 5, 0 + offsetY * 5);
-// 			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 11 && intro.mainCounter < intro.distortionStartFrame2 + 13) {
-// 				ctx.rotate(25 * Math.PI / 180);
-// 				ctx.transform(1.2, -1, .9, 2, -277 + offsetX * 5, -268 + offsetY * 5);
-// 			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 13 && intro.mainCounter < intro.distortionStartFrame2 + 15) {
-// 				ctx.rotate(22 * Math.PI / 180);
-// 				ctx.transform(1, 0, .5, 1.3, -77 + offsetX * 5, -268 + offsetY * 5);
-// 			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 15 && intro.mainCounter < intro.distortionStartFrame2 + 17) {
-// 				ctx.rotate(0 * Math.PI / 180);
-// 				ctx.transform(1, 0, 0, 1, 0 + offsetX * 5, 0 + offsetY * 5);
-// 			}
+			if (intro.mainCounter >= intro.distortionStartFrame2 + 3 && intro.mainCounter < intro.distortionStartFrame2 + 5) {
+				ctx.rotate(22 * Math.PI / 180);
+				ctx.transform(1, 0, .5, 1.3, -200 + offsetX * 5, -220 + offsetY * 5);
+			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 5 && intro.mainCounter < intro.distortionStartFrame2 + 7) {
+				ctx.rotate(22 * Math.PI / 180);
+				ctx.transform(1, 0, .5, 1.3, -55 + offsetX * 5, -220 + offsetY * 5);
+			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 7 && intro.mainCounter < intro.distortionStartFrame2 + 9) {
+				ctx.rotate(22 * Math.PI / 180);
+				ctx.transform(1, 0, .5, 1.3, -77 + offsetX * 5, -268 + offsetY * 5);
+			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 9 && intro.mainCounter < intro.distortionStartFrame2 + 11) {
+				ctx.rotate(0 * Math.PI / 180);
+				ctx.transform(1, 0, 0, 1, 0 + offsetX * 5, 0 + offsetY * 5);
+			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 11 && intro.mainCounter < intro.distortionStartFrame2 + 13) {
+				ctx.rotate(25 * Math.PI / 180);
+				ctx.transform(1.2, -1, .9, 2, -277 + offsetX * 5, -268 + offsetY * 5);
+			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 13 && intro.mainCounter < intro.distortionStartFrame2 + 15) {
+				ctx.rotate(22 * Math.PI / 180);
+				ctx.transform(1, 0, .5, 1.3, -77 + offsetX * 5, -268 + offsetY * 5);
+			} else if (intro.mainCounter >= intro.distortionStartFrame2 + 15 && intro.mainCounter < intro.distortionStartFrame2 + 17) {
+				ctx.rotate(0 * Math.PI / 180);
+				ctx.transform(1, 0, 0, 1, 0 + offsetX * 5, 0 + offsetY * 5);
+			}
 
 
-// //////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 			
-// 			if (intro.mainCounter === 400) {
-// 				intro.mainCounter = 0;
-// 				whiteNoise.volume = 0.25;
-// 				intro.logoAlpha = 1;
-// 			}
+			if (intro.mainCounter === 400) {
+				intro.mainCounter = 0;
+				whiteNoise.volume = 0.25;
+				intro.logoAlpha = 1;
+			}
 
-// //////////////////////////////////////////////////////////////////////////////////////////////////
-// 		} else if (intro.mainCounter === intro.distortionStartFrame2 + 18) {
-// 			intro.logoAlpha = 1;
-// 		}
-// 	}
-// }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+		} else if (intro.mainCounter === intro.distortionStartFrame2 + 18) {
+			intro.logoAlpha = 1;
+		}
+	}
+}*/
 
 /*const loop = () => {
 	canvas.width = intro.width;
