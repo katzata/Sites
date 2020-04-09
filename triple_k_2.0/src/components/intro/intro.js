@@ -46,8 +46,8 @@ class Intro {
 			false, true, false, true, false, true, false,
 		];
 		this.letterAlpha = [
-			0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0,
+			1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1, 1, 1, 1,
 		];
 		this.shadowOffsetX = [
 			1, 2, 3, 4, 5, 1, 2,
@@ -181,6 +181,10 @@ class Intro {
 		ctx.drawImage(logo, canvas.width / 2, canvas.height / 2, this.logoSize, this.logoSize * logo.height / logo.width);
 		ctx.restore();
 
+		this.handleText();
+	}
+
+	handleText() {
 		if (this.mainCounter >= this.lettersStartFrame) {
 			ctx.save();
 			
@@ -194,6 +198,194 @@ class Intro {
 
 			let letterWidth = ctx.measureText("M").width;
 			let letterWidth2 = ctx.measureText("K").width;
+			let letterWidth3 = ctx.measureText("A").width;
+			let letterWidth4 = ctx.measureText("E").width;
+			let letterWidth5 = ctx.measureText("N").width;
+			let letterWidth6 = ctx.measureText("S").width;
+			let letterWidth7 = ctx.measureText("H").width;
+			let letterWidth8 = ctx.measureText("C").width;
+			let letterWidth9 = ctx.measureText("I").width;
+			let letterWidth10 = ctx.measureText("V").width;
+
+			let differences = [
+				letterWidth - letterWidth2, //0 K
+				letterWidth - letterWidth3, //1 A
+				letterWidth - letterWidth4, //2 E
+				letterWidth - letterWidth5, //3 N
+				letterWidth - letterWidth6, //4 S
+				letterWidth - letterWidth7, //5 H
+				letterWidth - letterWidth8, //6 C
+				letterWidth - letterWidth9, //7 I
+				letterWidth - letterWidth10 //8 V
+			]
+			let difference = letterWidth - letterWidth2;
+console.log(differences)
+			ctx.shadowOffsetX = this.shadowOffsetAllX;
+			ctx.shadowOffsetY = this.shadowOffsetAllY;
+
+			if (this.mainCounter > this.lettersStartFrame) {
+				if (this.letterAlpha[0] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[0];
+					this.letterAlpha[0] += this.alphaIncrement;
+				}
+
+				ctx.fillText('K', canvas.width / 2 - (letterWidth * 7 - differences[0] * 7), canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay) {
+				if (this.letterAlpha[1] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[1];
+					this.letterAlpha[1] += this.alphaIncrement;
+				}
+
+				ctx.fillText('A', canvas.width / 2 - (letterWidth * 6 - differences[1] * 6), canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 2) {
+				if (this.letterAlpha[2] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[2];
+					this.letterAlpha[2] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('M', canvas.width / 2 - (letterWidth2 * 5), canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 3) {
+				if (this.letterAlpha[3] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[3];
+					this.letterAlpha[3] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('E', canvas.width / 2 - (letterWidth * 4 - differences[2] * 4) - differences[2], canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 4) {
+				if (this.letterAlpha[4] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[4];
+					this.letterAlpha[4] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('N', canvas.width / 2 - (letterWidth * 3 - difference * 3), canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 5) {
+				if (this.letterAlpha[5] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[5];
+					this.letterAlpha[5] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('K', canvas.width / 2 - (letterWidth - difference), canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 6) {
+				if (this.letterAlpha[6] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[6];
+					this.letterAlpha[6] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference) / 2 + differences[4], canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 7) {
+				if (this.letterAlpha[7] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[7];
+					this.letterAlpha[7] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('S', canvas.width / 2 + (letterWidth - differences[2]), canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 8) {
+				if (this.letterAlpha[8] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[8];
+					this.letterAlpha[8] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('H', canvas.width / 2 + (letterWidth - differences[4]) * 2, canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 9) {
+				if (this.letterAlpha[9] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[9];
+					this.letterAlpha[9] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('C', canvas.width / 2 + (letterWidth - differences[6]) + 43, canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 10) {
+				if (this.letterAlpha[10] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[10];
+					this.letterAlpha[10] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) + 70, canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 11) {
+				if (this.letterAlpha[11] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[11];
+					this.letterAlpha[11] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('I', canvas.width / 2 + (letterWidth - difference) + 100, canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 12) {
+				if (this.letterAlpha[12] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[12];
+					this.letterAlpha[12] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('E', canvas.width / 2 + (letterWidth - difference) + 113, canvas.height / 2 + 20);
+			}
+
+			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 13) {
+				if (this.letterAlpha[13] <= 1) {
+					ctx.globalAlpha = this.letterAlpha[13];
+					this.letterAlpha[13] += this.alphaIncrement;
+				}
+				
+				ctx.fillText('V', canvas.width / 2 + (letterWidth - difference) + 136, canvas.height / 2 + 20);
+			}
+			
+			ctx.restore();
+		}
+	}
+
+	test() {
+		ctx.save();
+			
+			ctx.font = `${canvas.height / 15}px Rune`;
+			ctx.fillStyle = "black";
+			ctx.textAligh = "center";
+			ctx.textBaseline = "center";
+			ctx.shadowBlur = this.shadowBlur;
+			ctx.shadowColor = "rgba(255, 255, 255, 1)";
+			ctx.strokeStyle = "#ffffff";
+
+			let letterWidth = ctx.measureText("M").width;
+			let letterWidth2 = ctx.measureText("K").width;
+			let letterWidth3 = ctx.measureText("A").width;
+			let letterWidth4 = ctx.measureText("E").width;
+			let letterWidth5 = ctx.measureText("N").width;
+			let letterWidth6 = ctx.measureText("S").width;
+			let letterWidth7 = ctx.measureText("H").width;
+			let letterWidth8 = ctx.measureText("C").width;
+			let letterWidth9 = ctx.measureText("I").width;
+			let letterWidth10 = ctx.measureText("V").width;
+
+			let differences = [
+				letterWidth - letterWidth2,
+				letterWidth - letterWidth3,
+				letterWidth - letterWidth4,
+				letterWidth - letterWidth5,
+				letterWidth - letterWidth6,
+				letterWidth - letterWidth7,
+				letterWidth - letterWidth8,
+				letterWidth - letterWidth9,
+				letterWidth - letterWidth10
+			]
 			let difference = letterWidth - letterWidth2;
 
 			ctx.shadowOffsetX = this.shadowOffsetAllX;
@@ -205,7 +397,7 @@ class Intro {
 					this.letterAlpha[0] += this.alphaIncrement;
 				}
 
-				ctx.fillText('K', canvas.width / 2 - (letterWidth - difference) * 7, canvas.height / 2 + 20);
+				ctx.fillText('K', canvas.width / 2 - (letterWidth - differences[0]) * 7, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay) {
@@ -214,7 +406,7 @@ class Intro {
 					this.letterAlpha[1] += this.alphaIncrement;
 				}
 
-				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference) * 6, canvas.height / 2 + 20);
+				ctx.fillText('A', canvas.width / 2 - (letterWidth - differences[1]) * 6, canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 2) {
@@ -259,7 +451,7 @@ class Intro {
 					this.letterAlpha[6] += this.alphaIncrement;
 				}
 				
-				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference) + 22, canvas.height / 2 + 20);
+				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference), canvas.height / 2 + 20);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 7) {
@@ -326,67 +518,6 @@ class Intro {
 			}
 			
 			ctx.restore();
-		}
-	}
-
-	test() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.save();
-			
-		ctx.font = `${canvas.height / 15}px Rune`;
-		ctx.fillStyle = "black";
-		ctx.textAligh = "center";
-		ctx.textBaseline = "center";
-		ctx.shadowBlur = 10;
-		ctx.shadowColor = "rgba(255, 255, 255, 1)";
-		ctx.strokeStyle = "#ffffff";
-
-		let letterWidth = ctx.measureText("M").width;
-		let letterWidth2 = ctx.measureText("K").width;
-		let difference = letterWidth - letterWidth2;
-
-		// ctx.shadowOffsetX = this.shadowOffsetAllX;
-		// ctx.shadowOffsetY = this.shadowOffsetAllY;
-
-		let initialX = canvas.width / 2;
-		let initialY = canvas.height / 2;
-
-		if (this.mainCounter > this.lettersStartFrame) {
-			if (this.letterAlpha[0] <= 1) {
-				ctx.globalAlpha = this.letterAlpha[0];
-				this.letterAlpha[0] += this.alphaIncrement;
-			}
-		}
-
-		let letters = "KAMEN KASHCHIEV";
-		let lettersWidth = ctx.measureText("KAMEN KASHCHIEV").width;
-		let lettersHeight = ctx.measureText("KAMEN KASHCHIEV").height;
-		// for (let i = 0; i < letters.length; i++) {
-		// 	ctx.fillText(`${letters[i]}`, initalX + (letterWidth - difference) * i, initalY + 20);
-		// }
-
-
-		// ctx.translate(-lettersWidth / 2, lettersHeight / 2)
-		ctx.fillText(`${letters}`, initialX, initialY + 20);
-		// ctx.fillText('K', initalX, initalY + 20);
-		// ctx.fillText('A', initalX + (letterWidth - difference), initalY + 20);
-		// ctx.fillText('M', initalX + (letterWidth2 * 2), initalY + 20);
-		// ctx.fillText('E', initalX + (letterWidth - difference) * 3, initalY + 20);
-		// ctx.fillText('N', canvas.width / 2 - (letterWidth - difference) * 3 + 4, initalY + 20);
-		// ctx.fillText('K', canvas.width / 2 - (letterWidth - difference) - 6, initalY + 20);
-		// ctx.fillText(' ', canvas.width / 2 - (letterWidth - difference) - 6, initalY + 20);
-		// ctx.fillText('A', initialX, initialY + 20);
-		// ctx.fillText('S', canvas.width / 2 + (letterWidth - difference) - difference, initalY + 20);
-		// ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) + 15, initalY + 20);
-		// ctx.fillText('C', canvas.width / 2 + (letterWidth - difference) + 43, initalY + 20);
-		// ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) + 70, initalY + 20);
-		// ctx.fillText('I', canvas.width / 2 + (letterWidth - difference) + 100, initalY + 20);
-		// ctx.fillText('E', canvas.width / 2 + (letterWidth - difference) + 113, initalY + 20);
-		// ctx.fillText('V', canvas.width / 2 + (letterWidth - difference) + 136, initalY + 20);
-		
-		ctx.restore();
 	}
 }
 
