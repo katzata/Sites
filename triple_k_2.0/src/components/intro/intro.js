@@ -27,7 +27,7 @@ class Intro {
 		this.distortionStartFrame2 = 300;
 		this.lettersStartFrame = 400;
 		this.lettersDelay = 14;
-		this.shadowBlur = 10;
+		this.shadowBlur = 11;
 		this.letterAlpha = [
 			0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0,
