@@ -11,51 +11,54 @@ whiteNoise.src = "../assets/audio/static.mp3";
 
 class Intro {
 	constructor() {
-		this.width = window.innerWidth;
-		this.height = window.innerHeight;
-		this.logoSize = window.innerHeight / 4;
 		this.running = true;
-		this.mainCounter = 0;
+		this.mainCounter = 550;
 		this.offsetX = 0;
 		this.offsetY = 0;
+		this.logoX = canvas.width / 2;
+		this.logoY = canvas.height / 2;
+		this.logoCenterX = 0;
+		this.logoCenterY = 0;
 		this.logoAlpha = 0;
+		this.logoSize = 0;
+		this.logoSizeDivider = 5;
+		this.fontSizeDivider = 19;
 		this.logoAlphaIncrement = 0.005;
 		this.textAlphaIncrement = 0.01;
 		this.volume = 0;
 		this.volumeIncrement = 0.005;
-		this.distortionStartFrame1 = 230;
-		this.distortionStartFrame2 = 300;
-		this.lettersStartFrame = 400;
+		this.distortionStartFrame = [230, 290, 720];
+		this.lettersStartFrame = 360;
 		this.lettersDelay = 14;
-		this.shadowBlur = 11;
+		this.shadowBlur = 10;
+		this.endingOffset = 0;
+		this.endingAlphaAddition = .5;
 		this.letterAlpha = [
 			0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0,
 		];
 	}
 
-	prepare() {
+	prepareCanvas() {
 		document.querySelector("body").appendChild(canvas);
-		canvas.width = this.width;
-		canvas.height = this.height;
-
-		logo.onload = () => {
-			ctx.imageSmoothingEnabled = false;
-			ctx.save();
-			// ctx.drawImage(logo, canvas.width / 2, canvas.height / 2, this.logoSize, this.logoSize * logo.height / logo.width);
-			ctx.restore();
-		}
-	}
-
-	render() {
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
-		this.logoSize = canvas.height / 4;
+	}
 
-		this.mainCounter++;
+	handleCanvasAndSizes() {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 
-		let offsetX = -Math.random();
-		let offsetY = -Math.random();
+		this.logoSize = canvas.height / this.logoSizeDivider;
+		this.logoX = canvas.width / 2;
+		this.logoY = canvas.height / 2;
+		this.logoCenterX = -this.logoSize / 2;
+		this.logoCenterY = -((this.logoSize * logo.height) / logo.width) / 2;
+	}
+
+	handleOffset() {
+		let offsetX = 0;
+		let offsetY = 0;
 		
 		if (this.mainCounter % 2 === 0) {
 			offsetX = -Math.random();
@@ -65,105 +68,145 @@ class Intro {
 			offsetY = Math.random();
 		}
 
-		// whiteNoise.play();
-		whiteNoise.volume = this.volume;
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
+	}
 
-		this.volume < 0.22 ? this.volume += this.volumeIncrement : null;
+	handleLogo() {
+		ctx.save();
 
 		if (this.logoAlpha <= 1 && this.mainCounter <= 200) {
 			this.logoAlpha += this.logoAlphaIncrement;
+		} else {
+			if (this.mainCounter < this.distortionStartFrame[2]) {
+				this.logoAlpha = Math.random() + .6;
+			}
 		}
 
-		if (this.mainCounter >= this.distortionStartFrame1 && this.mainCounter < this.distortionStartFrame1 + 8) {
-			offsetX = offsetX * 100;
-			offsetY = offsetY * 100;
+		if (this.mainCounter < this.distortionStartFrame[2]) {
+			let distortion = [0, .002];
+			ctx.transform(1, 0, distortion[Math.floor(Math.random() * 3)], 1, 0, 0);
+			
+			if (canvas.width < canvas.height) {
+				ctx.translate(0, this.offsetY * 3);
+			} else {
+				ctx.translate(0, this.offsetY * 1.1);
+			}
+		}
+
+		if (this.mainCounter >= this.distortionStartFrame[0] && this.mainCounter < this.distortionStartFrame[0] + 8) {
+			this.offsetX = this.offsetX;
+			this.offsetY = this.offsetY * 10;
 			whiteNoise.volume = 0.5;
 			this.logoAlpha = Math.random();
+
 			ctx.save();
+			ctx.scale(1, 1);
 
 			switch (this.mainCounter) {
-				case this.distortionStartFrame1:
-					ctx.transform(1, 0, -.1, 1, 40 + offsetX, 0 + offsetY);
+				case this.distortionStartFrame[0]:
+					ctx.transform(1, 0, -.1, 1, 40 + this.offsetX, -this.logoSize / 2 + this.offsetY);
 				break;
 
-				case this.distortionStartFrame1 + 1:
-					// ctx.transform(1, 0, -.2, 1, 79 + offsetX, 0 + offsetY);
+				// case this.distortionStartFrame[0] + 1:
+				// 	ctx.transform(1, 0, -.2, 1, 79 + this.offsetX, -this.logoSize / 2 + this.offsetY);
+				// break;
+
+				case this.distortionStartFrame[0] + 2:
+					ctx.transform(1, 0, -.3, 1, 119 + this.offsetX, -this.logoSize / 2 + this.offsetY);
 				break;
 
-				case this.distortionStartFrame1 + 2:
-					ctx.transform(1, 0, -.3, 1, 119 + offsetX, 0 + offsetY);
+				// case this.distortionStartFrame[0] + 3:
+				// 	ctx.transform(1, 0, -.4, 1, 158 + this.offsetX, -this.logoSize / 2 + this.offsetY);
+				// break;
+
+				case this.distortionStartFrame[0] + 4:
+					ctx.scale(1.1, 1.2);
+					ctx.transform(1, 0, -.5, 1, 240 + this.offsetX, -this.logoSize / 2 + this.offsetY);
 				break;
 
-				case this.distortionStartFrame1 + 3:
-					// ctx.transform(1, 0, -.4, 1, 158 + offsetX, 0 + offsetY);
+				// case this.distortionStartFrame[0] + 5:
+				// 	ctx.transform(1, 0, -.6, 1, 238 + this.offsetX, -this.logoSize / 2 + this.offsetY);
+				// break;
+
+				case this.distortionStartFrame[0] + 6:
+					ctx.transform(1, 0, -.5, 1, 240 + this.offsetX, -this.logoSize / 2 + this.offsetY);
 				break;
 
-				case this.distortionStartFrame1 + 4:
-					ctx.transform(1, 0, -.5, 1, 200 + offsetX, 0 + offsetY);
+				// case this.distortionStartFrame[0] + 7:
+				// 	ctx.transform(1, 0, -.4, 1, 158 + this.offsetX, -this.logoSize / 2 + this.offsetY);
+				// 	this.logoAlpha = 1;
+				// break;
+			}
+		}
+
+		if (this.mainCounter >= this.distortionStartFrame[1] && this.mainCounter < this.distortionStartFrame[1] + 7) {
+	
+			this.logoAlpha = Math.random();
+			whiteNoise.volume = 0.5;
+
+			switch (this.mainCounter) {
+				case this.distortionStartFrame[1]:
+					ctx.rotate(22 * Math.PI / 180);
+					ctx.transform(1, 0, .5, 1.3, -200 + this.offsetX * 5, -240 + this.offsetY * 5);
 				break;
 
-				case this.distortionStartFrame1 + 5:
-					ctx.transform(1, 0, -.6, 1, 238 + offsetX, 0 + offsetY);
+				case this.distortionStartFrame[1] + 1:
+					ctx.rotate(22 * Math.PI / 180);
+					ctx.transform(1, 0, .5, 1.3, -55 + this.offsetX * 5, -240 + this.offsetY * 5);
 				break;
 
-				case this.distortionStartFrame1 + 6:
-					// ctx.transform(1, 0, -.5, 1, 200 + offsetX, 0 + offsetY);
+				case this.distortionStartFrame[1] + 2:
+					ctx.rotate(22 * Math.PI / 180);
+					ctx.transform(1, 0, .5, 1.3, -77 + this.offsetX * 5, -288 + this.offsetY * 5);
 				break;
 
-				case this.distortionStartFrame1 + 7:
-					ctx.transform(1, 0, -.4, 1, 158 + offsetX, 0 + offsetY);
+				case this.distortionStartFrame[1] + 3:
+					ctx.rotate(0 * Math.PI / 180);
+					ctx.transform(1, 0, 0, 1, 0 + this.offsetX * 5, 0 + this.offsetY * 5);
+				break;
+
+				case this.distortionStartFrame[1] + 4:
+					ctx.rotate(25 * Math.PI / 180);
+					ctx.transform(1.2, -1, .9, 2, -277 + this.offsetX * 5, -288 + this.offsetY * 5);
+				break;
+
+				case this.distortionStartFrame[1] + 5:
+					ctx.rotate(22 * Math.PI / 180);
+					ctx.transform(1, 0, .5, 1.3, -77 + this.offsetX * 5, -288 + this.offsetY * 5);
+				break;
+
+				case this.distortionStartFrame[1] + 6:
+					ctx.rotate(0 * Math.PI / 180);
+					ctx.transform(1, 0, 0, 1, 0 + this.offsetX * 5, 0 + this.offsetY * 5);
+					
 					this.logoAlpha = 1;
 				break;
 			}
 		}
 
-		if (this.mainCounter >= this.distortionStartFrame2 && this.mainCounter <= this.distortionStartFrame2 + 17) {
-	
-			this.logoAlpha = Math.random();
-			whiteNoise.volume = 0.5;
-
-			if (this.mainCounter >= this.distortionStartFrame2 + 3 && this.mainCounter < this.distortionStartFrame2 + 5) {
-				ctx.rotate(22 * Math.PI / 180);
-				ctx.transform(1, 0, .5, 1.3, -200 + offsetX * 5, -220 + offsetY * 5);
-			} else if (this.mainCounter >= this.distortionStartFrame2 + 5 && this.mainCounter < this.distortionStartFrame2 + 7) {
-				ctx.rotate(22 * Math.PI / 180);
-				ctx.transform(1, 0, .5, 1.3, -55 + offsetX * 5, -220 + offsetY * 5);
-			} else if (this.mainCounter >= this.distortionStartFrame2 + 7 && this.mainCounter < this.distortionStartFrame2 + 9) {
-				ctx.rotate(22 * Math.PI / 180);
-				ctx.transform(1, 0, .5, 1.3, -77 + offsetX * 5, -268 + offsetY * 5);
-			} else if (this.mainCounter >= this.distortionStartFrame2 + 9 && this.mainCounter < this.distortionStartFrame2 + 11) {
-				ctx.rotate(0 * Math.PI / 180);
-				ctx.transform(1, 0, 0, 1, 0 + offsetX * 5, 0 + offsetY * 5);
-			} else if (this.mainCounter >= this.distortionStartFrame2 + 11 && this.mainCounter < this.distortionStartFrame2 + 13) {
-				ctx.rotate(25 * Math.PI / 180);
-				ctx.transform(1.2, -1, .9, 2, -277 + offsetX * 5, -268 + offsetY * 5);
-			} else if (this.mainCounter >= this.distortionStartFrame2 + 13 && this.mainCounter < this.distortionStartFrame2 + 15) {
-				ctx.rotate(22 * Math.PI / 180);
-				ctx.transform(1, 0, .5, 1.3, -77 + offsetX * 5, -268 + offsetY * 5);
-			} else if (this.mainCounter >= this.distortionStartFrame2 + 15 && this.mainCounter < this.distortionStartFrame2 + 17) {
-				ctx.rotate(0 * Math.PI / 180);
-				ctx.transform(1, 0, 0, 1, 0 + offsetX * 5, 0 + offsetY * 5);
-			}
-
-			ctx.restore();
-		} else if (this.mainCounter === this.distortionStartFrame2 + 18) {
-			this.logoAlpha = 1;
-		}
-
 		ctx.globalAlpha = this.logoAlpha;
-		ctx.save();
-		ctx.translate(-this.logoSize / 2, -((this.logoSize * logo.height) / logo.width) / 2);
-		ctx.drawImage(logo, canvas.width / 2, canvas.height / 2, this.logoSize, this.logoSize * logo.height / logo.width);
+		ctx.imageSmoothingEnabled = true;
+		ctx.translate(this.logoCenterX, this.logoCenterY);
+		ctx.drawImage(logo, this.logoX, this.logoY, this.logoSize, this.logoSize * logo.height / logo.width);
 		ctx.restore();
-
-		this.handleText();
 	}
 
 	handleText() {
 		if (this.mainCounter >= this.lettersStartFrame) {
 			ctx.save();
+
+			if (canvas.width < canvas.height && canvas.width <= 980) {
+				this.fontSizeDivider = 20;
+			} else {
+				this.fontSizeDivider = 19;
+			}
 			
-			ctx.font = `${canvas.height / 15}px Rune`;
+			if (this.mainCounter >= this.distortionStartFrame[2] + 20) {
+				ctx.globalAlpha = this.logoAlpha;
+			}
+
+			ctx.font = `${canvas.height / this.fontSizeDivider}px Rune`;
 			ctx.fillStyle = "black";
 			ctx.textAligh = "center";
 			ctx.textBaseline = "center";
@@ -202,7 +245,8 @@ class Intro {
 					this.letterAlpha[0] += this.textAlphaIncrement;
 				}
 
-				ctx.fillText('K', canvas.width / 2 - (letterWidth * 7 - differences[0] * 7), canvas.height / 2 + differences[7]);
+				ctx.fillText('K', canvas.width / 2 - (letterWidth * 7 - differences[0] * 8.1), canvas.height / 2 + differences[7]);
+				ctx.fillText('K', canvas.width / 2 - (letterWidth * 7 - differences[0] * 8.1), canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay) {
@@ -211,7 +255,8 @@ class Intro {
 					this.letterAlpha[1] += this.textAlphaIncrement;
 				}
 
-				ctx.fillText('A', canvas.width / 2 - (letterWidth * 6 - differences[1] * 6), canvas.height / 2 + differences[7]);
+				ctx.fillText('A', canvas.width / 2 - (letterWidth * 6 - differences[1] * 7.08), canvas.height / 2 + differences[7]);
+				ctx.fillText('A', canvas.width / 2 - (letterWidth * 6 - differences[1] * 7.08), canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 2) {
@@ -220,7 +265,8 @@ class Intro {
 					this.letterAlpha[2] += this.textAlphaIncrement;
 				}
 				
-				ctx.fillText('M', canvas.width / 2 - (letterWidth2 * 5), canvas.height / 2 + differences[7]);
+				ctx.fillText('M', canvas.width / 2 - (letterWidth2 * 5 - differences[6] / 1.1), canvas.height / 2 + differences[7]);
+				ctx.fillText('M', canvas.width / 2 - (letterWidth2 * 5 - differences[6] / 1.1), canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 3) {
@@ -229,7 +275,8 @@ class Intro {
 					this.letterAlpha[3] += this.textAlphaIncrement;
 				}
 				
-				ctx.fillText('E', canvas.width / 2 - (letterWidth * 4 - differences[2] * 4) - differences[2], canvas.height / 2 + differences[7]);
+				ctx.fillText('E', canvas.width / 2 - (letterWidth * 4 - differences[2] * 4.3) - differences[5], canvas.height / 2 + differences[7]);
+				ctx.fillText('E', canvas.width / 2 - (letterWidth * 4 - differences[2] * 4.3) - differences[5], canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 4) {
@@ -238,7 +285,8 @@ class Intro {
 					this.letterAlpha[4] += this.textAlphaIncrement;
 				}
 				
-				ctx.fillText('N', canvas.width / 2 - (letterWidth * 3 - difference * 3), canvas.height / 2 + differences[7]);
+				ctx.fillText('N', canvas.width / 2 - (letterWidth * 3 - differences[0] * 5.8) - differences[6], canvas.height / 2 + differences[7]);
+				ctx.fillText('N', canvas.width / 2 - (letterWidth * 3 - differences[0] * 5.8) - differences[6], canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 5) {
@@ -247,6 +295,7 @@ class Intro {
 					this.letterAlpha[5] += this.textAlphaIncrement;
 				}
 				
+				ctx.fillText('K', canvas.width / 2 - (letterWidth - difference), canvas.height / 2 + differences[7]);
 				ctx.fillText('K', canvas.width / 2 - (letterWidth - difference), canvas.height / 2 + differences[7]);
 			}
 
@@ -257,6 +306,7 @@ class Intro {
 				}
 				
 				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference) / 2 + differences[4], canvas.height / 2 + differences[7]);
+				ctx.fillText('A', canvas.width / 2 - (letterWidth - difference) / 2 + differences[4], canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 7) {
@@ -265,6 +315,7 @@ class Intro {
 					this.letterAlpha[7] += this.textAlphaIncrement;
 				}
 				
+				ctx.fillText('S', canvas.width / 2 + (letterWidth - differences[6]), canvas.height / 2 + differences[7]);
 				ctx.fillText('S', canvas.width / 2 + (letterWidth - differences[6]), canvas.height / 2 + differences[7]);
 			}
 
@@ -275,6 +326,7 @@ class Intro {
 				}
 				
 				ctx.fillText('H', canvas.width / 2 + (letterWidth - differences[2]) * 2 - 1, canvas.height / 2 + differences[7]);
+				ctx.fillText('H', canvas.width / 2 + (letterWidth - differences[2]) * 2 - 1, canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 9) {
@@ -283,7 +335,8 @@ class Intro {
 					this.letterAlpha[9] += this.textAlphaIncrement;
 				}
 				
-				ctx.fillText('C', canvas.width / 2 + (letterWidth - differences[2]) * 3 + 2, canvas.height / 2 + differences[7]);
+				ctx.fillText('C', canvas.width / 2 + (letterWidth - differences[2]) * 3.05, canvas.height / 2 + differences[7]);
+				ctx.fillText('C', canvas.width / 2 + (letterWidth - differences[2]) * 3.05, canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 10) {
@@ -292,6 +345,7 @@ class Intro {
 					this.letterAlpha[10] += this.textAlphaIncrement;
 				}
 				
+				ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) * 4 - (differences[6] + differences[1]), canvas.height / 2 + differences[7]);
 				ctx.fillText('H', canvas.width / 2 + (letterWidth - difference) * 4 - (differences[6] + differences[1]), canvas.height / 2 + differences[7]);
 			}
 
@@ -302,6 +356,7 @@ class Intro {
 				}
 				
 				ctx.fillText('I', canvas.width / 2 + (letterWidth - difference) * 5 - (differences[6] + differences[5]), canvas.height / 2 + differences[7]);
+				ctx.fillText('I', canvas.width / 2 + (letterWidth - difference) * 5 - (differences[6] + differences[5]), canvas.height / 2 + differences[7]);
 			}
 
 			if (this.mainCounter >= this.lettersStartFrame + this.lettersDelay * 12) {
@@ -310,6 +365,7 @@ class Intro {
 					this.letterAlpha[12] += this.textAlphaIncrement;
 				}
 				
+				ctx.fillText('E', canvas.width / 2 + (letterWidth - differences[4]) * 6 + differences[6], canvas.height / 2 + differences[7]);
 				ctx.fillText('E', canvas.width / 2 + (letterWidth - differences[4]) * 6 + differences[6], canvas.height / 2 + differences[7]);
 			}
 
@@ -320,16 +376,152 @@ class Intro {
 				}
 				
 				ctx.fillText('V', canvas.width / 2 + (letterWidth - differences[6]) * 7 - differences[7], canvas.height / 2 + differences[7]);
+				ctx.fillText('V', canvas.width / 2 + (letterWidth - differences[6]) * 7 - differences[7], canvas.height / 2 + differences[7]);
 			}
 			
 			ctx.restore();
 		}
 	}
+
+	handleAudio() {
+		// whiteNoise.play();
+		whiteNoise.volume = this.volume;
+		this.volume < 0.22 ? this.volume += this.volumeIncrement : null;
+	}
+
+	handleEnding() {
+		if (this.mainCounter >= this.distortionStartFrame[2] /*&& this.mainCounter < this.distortionStartFrame[2] + 10*/) {	
+			if (this.mainCounter >= this.distortionStartFrame[2] && this.mainCounter <= this.distortionStartFrame[2] + 40) {
+				if (this.endingAlphaAddition > -.3) {
+					this.endingAlphaAddition -= .05;
+				}
+
+				if (this.endingOffset <= 8) {
+					this.endingOffset += 0.5;
+					this.volume += this.volumeIncrement * 3;
+				}
+			}
+
+			this.logoAlpha = Math.random() + this.endingAlphaAddition;
+
+			const startFrame = 89;
+			let distortion = [0, .006];
+
+			ctx.translate(0, this.endingOffset + this.offsetY * 2);
+			ctx.transform(1, 0, this.volume / 10 + distortion[Math.floor(Math.random() * 2)], 1, 0, 0);
+
+			switch (this.mainCounter) {
+				case this.distortionStartFrame[2] + startFrame + 1:
+					ctx.transform(1, 0, 0.3, 1.2, -this.logoSize / 1.2, -this.logoSize * 1.2 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 2:
+					ctx.transform(1, 0, .4, 1.4, -this.logoSize / 1.2, -this.logoSize * 1.4 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 3:
+					ctx.transform(1, 0, .3, 1.6, -160, -190);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 4:
+					ctx.transform(1, 0, .45, 1.8, -this.logoSize, -this.logoSize * 1.8 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 5:
+					ctx.transform(1, 0, .32, 1.5, -160, -190);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 6:
+					ctx.transform(1, 0, 0.3, 1.2, -this.logoSize / 1.2, -this.logoSize * 1.2 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 7:
+					ctx.transform(1, 0, 0, 1, 0, 0);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 8:
+					ctx.transform(1, 0, 0, 1.3, 0, -40 + -this.logoSize * 1.3 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 9:
+					ctx.transform(1.4, 0, 0, 1.5, -120, -this.logoSize * 1.5 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 10:
+					ctx.transform(1, 0, 0, 1.2, 0, -40 + -this.logoSize * 1.3 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 11:
+					ctx.transform(1.3, 0, -.2, 1.5, -60, -this.logoSize * 1.5 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 12:
+					ctx.transform(1.3, 0, -.4, 1.8, -0, -this.logoSize * 1.7 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 13:
+					ctx.transform(1.2, 0, -.4, 2.2, 70, -this.logoSize * 2 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 14:
+					ctx.rotate(-12 * Math.PI / 480);
+					ctx.transform(1.2, 0, -.3, 2.4, 70, -this.logoSize * 2.1 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 15:
+					ctx.rotate(-16 * Math.PI / 480);
+					ctx.transform(1.4, 0, -.3, 2.6, -70, -this.logoSize * 2.3 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 16:
+					ctx.transform(1.4, 0, -.4, 2.9, 0, -this.logoSize * 5.8 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 17:
+					ctx.transform(1.4, 0, -.5, 3.6, 70, -this.logoSize * 6.9 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 18:
+					ctx.transform(1.4, 0, -.6, 3, 100, -this.logoSize * 6 + this.offsetY);
+				break;
+
+				case this.distortionStartFrame[2] + startFrame + 19:
+					ctx.rotate(-50 * Math.PI / 480);
+					ctx.transform(1.4, 0, -.7, 2.8, 100, -this.logoSize * 3 + this.offsetY);
+				break;
+			}
+
+			if (this.mainCounter > this.distortionStartFrame[2] + startFrame + 20) {
+				this.running = false;
+			}
+		}
+	}
+
+	handleCrack() {
+		
+	}
+
+	render() {
+		this.handleCanvasAndSizes();
+		this.mainCounter++;
+		this.handleOffset();
+
+		this.handleEnding();
+		this.handleAudio();
+		
+		if (this.mainCounter < this.distortionStartFrame[2] + 89 + 20) {
+			this.handleLogo();
+			this.handleText();
+		} else {
+
+		}
+	}
 }
 
-window.onclick = () => {
+window.ontouchstart = () => {
 	// intro.running = !intro.running;
 	// console.log(ctx)
+	// alert(`${window.innerHeight}`)
 }
 
 window.onload = () => {
