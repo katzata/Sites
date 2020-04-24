@@ -1,4 +1,4 @@
-
+import "./index.css";
 import Intro from "./components/intro/intro.js";
 import MainContainer from "./components/MainContainer/MainContainer.js";
 import MainPage from "./components/MainPage/MainPage.js";

@@ -6,6 +6,9 @@ let ctx;
 
 const crack = new Image();
 crack.src = "../assets/img/crack.png";
+const logo = new Image();
+logo.src = "../assets/img/roza2.png";
+
 
 let whiteNoise = document.createElement("audio");
 whiteNoise.src = "../assets/audio/static.mp3";
@@ -14,7 +17,10 @@ class MainPage {
 	constructor() {
 		this.crackWidth;
 		this.crackHeight;
-		this.initialY
+		this.crackCoverWidth = window.innerWidth;
+		this.pageDone = false;
+		this.startHrCount = false;
+		this.hrCount = 0;
 	}
 
 	prepare() {
@@ -28,38 +34,118 @@ class MainPage {
 
 		this.crackWidth = canvas.height * crack.height / crack.width;
 		this.crackHeight = canvas.width * crack.height / crack.width;
-
-		// this.logoSize = canvas.height / this.logoSizeDivider;
-		// this.logoX = canvas.width / 2;
-		// this.logoY = canvas.height / 2;
-		// this.logoCenterX = -this.logoSize / 2;
-		// this.logoCenterY = -((this.logoSize * logo.height) / logo.width) / 2;
 	}
 
 	handleCrack() {
+		if (this.crackCoverWidth > 0) {
+			this.crackCoverWidth -= canvas.width / 2;
+		}
+
 		ctx.save();
+		ctx.globalAlpha = .9;
 		ctx.translate(-canvas.width / 2, -this.crackHeight / 2);
 		ctx.drawImage(crack, canvas.width / 2, canvas.height / 2, canvas.width, this.crackHeight);
 		ctx.restore();
-	}
 
-	handleEntry() {
 		ctx.beginPath();
-		ctx.moveTo(25, 100);
-		ctx.lineTo(canvas.width - 25, 100);
-		ctx.strokeStyle = "#FFFFFF";
+		ctx.rect(0, 0, this.crackCoverWidth, canvas.height);
+		ctx.fillRect(0, 0, this.crackCoverWidth, canvas.height);
 		ctx.stroke();
 	}
 
-	handleContent() {
+	handleHeader() {
+		let body = document.querySelector("body");
 
+		const header = document.createElement("header");
+		
+		logo.classList.add("logo");
+		header.appendChild(logo);
+
+		const headerTitle = document.createElement("h1");
+		headerTitle.classList.add("headerTitle");
+		headerTitle.appendChild(document.createTextNode("KAMEN KASHCHIEV"))
+		header.appendChild(headerTitle);
+
+		const headerTitle2 = document.createElement("h1");
+		headerTitle2.classList.add("headerTitle2");
+		headerTitle2.appendChild(document.createTextNode("KAMEN KASHCHIEV"))
+		header.appendChild(headerTitle2);
+
+		body.appendChild(header);
+	}
+
+	handleContent() {
+		let body = document.querySelector("body");
+		
+		const main = document.createElement("main");
+		// main.innerHTML = `
+		// 	<hr class="hrTop">
+
+		// 	<section class="mainInternalSection">
+
+		// 	</section>
+
+		// 	<hr class="hrBottom">
+		// `;
+		const hrTop = document.createElement("hrTop");
+		hrTop.classList.add("hrTop");
+		main.appendChild(hrTop);
+
+		const section = document.createElement("section");
+		section.classList.add("mainInternalSection");
+		main.appendChild(section);
+
+		const hrBottom = document.createElement("hrBottom");
+		hrBottom.classList.add("hrBottom");
+		main.appendChild(hrBottom);
+
+		body.appendChild(main);
+	}
+
+	handleFooter() {
+		let body = document.querySelector("body");
+
+		const footer = document.createElement("footer");
+		
+		const footerText = document.createElement("p");
+		footerText.classList.add("footerText");
+		footerText.appendChild(document.createTextNode(`Copywright © ${new Date().getFullYear()}`));
+		footer.appendChild(footerText);
+
+		body.appendChild(footer);
+	}
+
+	handleEntry() {
+		setTimeout(() => {
+			document.querySelector(".headerTitle").style.opacity = "1";
+			document.querySelector(".headerTitle2").style.opacity = "1";
+			document.querySelector(".logo").style.opacity = "1";
+			document.querySelector(".hrTop").style.opacity = "1";
+			document.querySelector(".hrBottom").style.opacity = "1";
+
+			setTimeout(() => {
+				document.querySelector(".hrBottom").style.bottom -= this.hrCount;
+			}, 1500)
+		}, 380)
 	}
 
 	render() {
 		this.prepare();
 		this.handleCanvasAndSizes();
 		this.handleCrack();
-		this.handleEntry();
+
+		if (!this.pageDone) {
+			this.handleHeader();
+			this.handleContent();
+			this.handleFooter();
+
+			this.pageDone = true;
+			this.handleEntry();
+		}
+
+		if () {
+			this.hrCount -= 20;
+		}
 	}
 }
 

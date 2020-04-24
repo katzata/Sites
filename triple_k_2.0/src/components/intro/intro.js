@@ -206,7 +206,7 @@ class Intro {
 				ctx.globalAlpha = this.logoAlpha;
 			}
 
-			ctx.font = `${canvas.height / this.fontSizeDivider}px Rune`;
+			ctx.font = `${canvas.height / this.fontSizeDivider}px SpectralSC`;
 			ctx.fillStyle = "black";
 			ctx.textAligh = "center";
 			ctx.textBaseline = "center";
@@ -497,10 +497,6 @@ class Intro {
 		}
 	}
 
-	handleCrack() {
-		
-	}
-
 	render() {
 		this.handleCanvasAndSizes();
 		this.mainCounter++;
@@ -512,8 +508,6 @@ class Intro {
 		if (this.mainCounter < this.distortionStartFrame[2] + 89 + 20) {
 			this.handleLogo();
 			this.handleText();
-		} else {
-
 		}
 	}
 }
