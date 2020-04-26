@@ -1,6 +1,6 @@
-import "./intro.css";
+import "./Intro.css";
 
-const canvas = document.createElement("canvas");
+const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
 
 const logo = new Image();
@@ -12,7 +12,7 @@ whiteNoise.src = "../assets/audio/static.mp3";
 class Intro {
 	constructor() {
 		this.running = true;
-		this.mainCounter = 550;
+		this.mainCounter = 570;
 		this.offsetX = 0;
 		this.offsetY = 0;
 		this.logoX = canvas.width / 2;
@@ -28,21 +28,15 @@ class Intro {
 		this.volume = 0;
 		this.volumeIncrement = 0.005;
 		this.distortionStartFrame = [230, 290, 720];
-		this.lettersStartFrame = 360;
-		this.lettersDelay = 14;
 		this.shadowBlur = 10;
 		this.endingOffset = 0;
 		this.endingAlphaAddition = .5;
+		this.lettersStartFrame = 360;
+		this.lettersDelay = 14;
 		this.letterAlpha = [
 			0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0,
 		];
-	}
-
-	prepareCanvas() {
-		document.querySelector("body").appendChild(canvas);
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
 	}
 
 	handleCanvasAndSizes() {
@@ -206,7 +200,7 @@ class Intro {
 				ctx.globalAlpha = this.logoAlpha;
 			}
 
-			ctx.font = `${canvas.height / this.fontSizeDivider}px SpectralSC`;
+			ctx.font = `${canvas.height / this.fontSizeDivider}px SpectralSC-Regular`;
 			ctx.fillStyle = "black";
 			ctx.textAligh = "center";
 			ctx.textBaseline = "center";
@@ -510,16 +504,6 @@ class Intro {
 			this.handleText();
 		}
 	}
-}
-
-window.ontouchstart = () => {
-	// intro.running = !intro.running;
-	// console.log(ctx)
-	// alert(`${window.innerHeight}`)
-}
-
-window.onload = () => {
-
 }
 
 export default Intro;

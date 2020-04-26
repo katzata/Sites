@@ -1,150 +1,176 @@
 import "./MainPage.css";
-import content from "./PageContent";
+import Content from "../PageContent/PageContent";
+import MainSection from "../MainSection/MainSection";
+import CvSection1 from "../CvSection1/CvSection1";
 
 let canvas;
 let ctx;
 
 const crack = new Image();
-crack.src = "../assets/img/crack.png";
-const logo = new Image();
-logo.src = "../assets/img/roza2.png";
+crack.src = "../assets/img/crack.png"
 
-
-let whiteNoise = document.createElement("audio");
+const whiteNoise = document.createElement("audio");
 whiteNoise.src = "../assets/audio/static.mp3";
+
+const mainSection = new MainSection();
 
 class MainPage {
 	constructor() {
-		this.crackWidth;
-		this.crackHeight;
-		this.crackCoverWidth = window.innerWidth;
-		this.pageDone = false;
-		this.startHrCount = false;
-		this.hrCount = 0;
+		this.mainCounter = 0;
+		this.pagePrepared = false;
+		this.renderSection = false;
+
+		this.language = {
+			en: true,
+			bg: false,
+			it: false
+		}
+
+		this.content = {
+			pageContainer: document.querySelector(".pageContainer"),
+			header: document.querySelector("header"),
+			logo: document.querySelector(".logo"),
+			title1: document.querySelector(".headerTitle"),
+			title2: document.querySelector(".headerTitle2"),
+			main: document.querySelector("main"),
+			nav: document.querySelector("nav"),
+			hrTop: document.querySelector(".hrTop"),
+			mainSection: document.querySelector(".mainSection"),
+			hrBottom: document.querySelector(".hrBottom"),
+			footer: document.querySelector("footer"),
+			footerText: document.querySelector(".footerText")
+		}
+		
+		this.crack = {
+			width: 0,
+			height: 0,
+			cover: window.innerWidth
+		}
+
+		this.stages = {
+			first: 22,
+			second: 140,
+			third: 194,
+			fourth: 250
+		}
+		
+		this.opacity = {
+			increment: .015,
+			header: 0,
+			main: 0,
+			footer: 0
+		}
+
+		this.viewing = {
+			mainSection: true,
+			cv1Section: false,
+			cv2Section: false,
+			certificatesSection: false
+		}
 	}
 
 	prepare() {
 		canvas = document.querySelector("canvas");
 		ctx = canvas.getContext('2d');
+
+		this.content.footerText.appendChild(document.createTextNode(`Copywright © ${new Date().getFullYear()}`));
 	}
 
-	handleCanvasAndSizes() {
+	handleCanvas() {
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 
-		this.crackWidth = canvas.height * crack.height / crack.width;
-		this.crackHeight = canvas.width * crack.height / crack.width;
+		this.crack.width = canvas.height * crack.height / crack.width;
+		this.crack.height = canvas.width * crack.height / crack.width;
 	}
 
 	handleCrack() {
-		if (this.crackCoverWidth > 0) {
-			this.crackCoverWidth -= canvas.width / 2;
+		if (this.crack.cover > 0) {
+			this.crack.cover -= canvas.width / 2;
 		}
 
 		ctx.save();
-		ctx.globalAlpha = .9;
-		ctx.translate(-canvas.width / 2, -this.crackHeight / 2);
-		ctx.drawImage(crack, canvas.width / 2, canvas.height / 2, canvas.width, this.crackHeight);
+		ctx.globalAlpha = .8;
+		ctx.translate(-canvas.width / 2, -this.crack.height / 2);
+		ctx.drawImage(crack, canvas.width / 2, canvas.height / 2, canvas.width, this.crack.height);
 		ctx.restore();
 
 		ctx.beginPath();
-		ctx.rect(0, 0, this.crackCoverWidth, canvas.height);
-		ctx.fillRect(0, 0, this.crackCoverWidth, canvas.height);
+		ctx.rect(0, 0, this.crack.cover, canvas.height);
+		ctx.fillRect(0, 0, this.crack.cover, canvas.height);
 		ctx.stroke();
 	}
 
-	handleHeader() {
-		let body = document.querySelector("body");
+	handleEntryStage(stage) {
+		if (stage === 1) {
+			this.content.header.style.opacity = `${this.opacity.header}`;
+			this.content.footer.style.opacity = `${this.opacity.footer}`;
+			this.content.main.style.opacity = `${this.opacity.main}`;
+		}
 
-		const header = document.createElement("header");
-		
-		logo.classList.add("logo");
-		header.appendChild(logo);
+		if (stage === 2) {
+			this.content.pageContainer.style.height = "100%";
+		}
 
-		const headerTitle = document.createElement("h1");
-		headerTitle.classList.add("headerTitle");
-		headerTitle.appendChild(document.createTextNode("KAMEN KASHCHIEV"))
-		header.appendChild(headerTitle);
+		if (stage === 3) {
+			this.content.footer.style.boxShadow = "0 0 18px 15px black";
+			this.content.footer.style.backgroundColor = `rgba(0, 0, 0, .8)`;
+			this.content.footerText.style.transform = `translateY(0vh)`;
+		}
 
-		const headerTitle2 = document.createElement("h1");
-		headerTitle2.classList.add("headerTitle2");
-		headerTitle2.appendChild(document.createTextNode("KAMEN KASHCHIEV"))
-		header.appendChild(headerTitle2);
-
-		body.appendChild(header);
-	}
-
-	handleContent() {
-		let body = document.querySelector("body");
-		
-		const main = document.createElement("main");
-		// main.innerHTML = `
-		// 	<hr class="hrTop">
-
-		// 	<section class="mainInternalSection">
-
-		// 	</section>
-
-		// 	<hr class="hrBottom">
-		// `;
-		const hrTop = document.createElement("hrTop");
-		hrTop.classList.add("hrTop");
-		main.appendChild(hrTop);
-
-		const section = document.createElement("section");
-		section.classList.add("mainInternalSection");
-		main.appendChild(section);
-
-		const hrBottom = document.createElement("hrBottom");
-		hrBottom.classList.add("hrBottom");
-		main.appendChild(hrBottom);
-
-		body.appendChild(main);
-	}
-
-	handleFooter() {
-		let body = document.querySelector("body");
-
-		const footer = document.createElement("footer");
-		
-		const footerText = document.createElement("p");
-		footerText.classList.add("footerText");
-		footerText.appendChild(document.createTextNode(`Copywright © ${new Date().getFullYear()}`));
-		footer.appendChild(footerText);
-
-		body.appendChild(footer);
-	}
-
-	handleEntry() {
-		setTimeout(() => {
-			document.querySelector(".headerTitle").style.opacity = "1";
-			document.querySelector(".headerTitle2").style.opacity = "1";
-			document.querySelector(".logo").style.opacity = "1";
-			document.querySelector(".hrTop").style.opacity = "1";
-			document.querySelector(".hrBottom").style.opacity = "1";
-
-			setTimeout(() => {
-				document.querySelector(".hrBottom").style.bottom -= this.hrCount;
-			}, 1500)
-		}, 380)
+		if (stage === 4) {
+			this.pageDone = true;
+		}
 	}
 
 	render() {
-		this.prepare();
-		this.handleCanvasAndSizes();
-		this.handleCrack();
+		if (!this.pagePrepared) {
+			this.prepare();
 
-		if (!this.pageDone) {
-			this.handleHeader();
-			this.handleContent();
-			this.handleFooter();
-
-			this.pageDone = true;
-			this.handleEntry();
+			this.pagePrepared = true;
+		} else {
+			this.mainCounter++;
 		}
 
-		if () {
-			this.hrCount -= 20;
+		this.handleCanvas();
+		this.handleCrack();
+
+		if (this.opacity.header < 1 && this.mainCounter >= this.stages.first) {
+			this.opacity.header += this.opacity.increment;
+			this.opacity.main += this.opacity.increment;
+			this.opacity.footer += this.opacity.increment;
+
+			this.handleEntryStage(1);
+		}
+
+		if (this.content.pageContainer.style.height !== "100%" && this.mainCounter >= this.stages.second) {
+			this.handleEntryStage(2);
+		}
+
+		if (this.mainCounter === this.stages.third) {
+			this.handleEntryStage(3);
+		}
+
+		if (this.mainCounter === this.stages.fourth) {
+			this.handleEntryStage(4);
+		}
+
+		if (this.pageDone) {
+			if (this.viewing.mainSection === true) {
+				mainSection.render();
+			}
+
+			if (this.viewing.cv1Section === true) {
+				CvSection1.render();
+			}
+
+			if (this.viewing.cv2Section === true) {
+				CvSection2.render();
+			}
+
+			if (this.viewing.certificatesSection === true) {
+				CertificatesSection.render();
+			}
 		}
 	}
 }

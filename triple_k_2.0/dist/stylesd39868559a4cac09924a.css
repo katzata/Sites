@@ -1,22 +1,22 @@
 @font-face {
 	font-family: "rune";
-	src: url("./assets/fonts/rune.ttf") format("ttf");
-	src: url("./assets/fonts/rune.woff") format("woff");
-	src: url("./assets/fonts/rune.woff2") format("woff2");
+	src: url(assets/609b1f417e3510ec8fff196e88d89cd5.ttf) format("ttf");
+	src: url(assets/8b136d10364b92d21e6efc5d66180034.woff) format("woff");
+	src: url(assets/356e57b365f8b3936c5362e9fa06e8de.woff2) format("woff2");
 }
 
 @font-face {
 	font-family: "SpectralSC";
-	src: url("./assets/fonts/SpectralSC-Medium.ttf") format("ttf");
-	src: url("./assets/fonts/SpectralSC-Medium.woff") format("woff");
-	src: url("./assets/fonts/SpectralSC-Medium.woff2") format("woff2");
+	src: url(assets/cfdf762346dcdbefbd075a6a7f71126b.ttf) format("ttf");
+	src: url(assets/f06c5671ba6388314a334351453fe192.woff) format("woff");
+	src: url(assets/b1c2551d0f2b49c9b9faece7c6019920.woff2) format("woff2");
 }
 
 @font-face {
 	font-family: "SpectralSC-reular";
-	src: url("./assets/fonts/SpectralSC-Regular.ttf") format("ttf");
-	src: url("./assets/fonts/SpectralSC-Regular.woff") format("woff");
-	src: url("./assets/fonts/SpectralSC-Regular.woff2") format("woff2");
+	src: url(assets/f14633a514b99c62fc62fb6e1a33bf20.ttf) format("ttf");
+	src: url(assets/ee5e5819ffa53ed4f4f3a15798d68aaa.woff) format("woff");
+	src: url(assets/704ce25bdaac966909a02c7d38fba854.woff2) format("woff2");
 }
 
 * {
@@ -137,3 +137,38 @@ footer {
 	transition-timing-function: ease-in-out;
 	opacity: 1;
 }
+
+.mainSection {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 20px 30px;
+	transition-duration: 1s;
+	transition-timing-function: ease-in-out;
+	overflow-y: hidden;
+	opacity: 0;
+}
+
+.topArticle {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	justify-items: center;
+	align-items: center;
+}
+
+.topArticleCanvas {
+	/*width: 300px;
+	height: 320px;*/
+	background-color: red;
+}
+
+.topArticleImg {
+	opacity: 0;
+}
+
+.bottomArticleCanvas {
+	background-color: purple;
+}
+
+

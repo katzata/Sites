@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Handlebars = require("handlebars");
 const CopyPlugin = require('copy-webpack-plugin');
 
 
@@ -20,7 +21,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.png$/,
+				test: /\.(png|ttf|woff|woff2)$/,
 				loader: "file-loader",
 				options: {
 					outputPath: "assets",
@@ -42,6 +43,12 @@ module.exports = {
 						plugins: [ "transform-class-properties" ]
 					}
 				}
+			},
+			{
+				test: /\.hbs$/,
+				use: [
+					"handlebars-loader"
+				]
 			}
 		]
 	},
@@ -52,13 +59,17 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			title: "TRIPLE K",
-			filename: "index.html",
-			meta: {
-				description: "portfolio"
-			}
+			template: "src/index.hbs",
+
 		}),
 		new CopyPlugin([
-			{ from: 'src/assets', to: 'assets' }
+			{ 
+				from: 'src/assets', to: 'assets',
+				ignore: [
+					"fonts/font",
+					'*.zip'
+				]
+			}
 		])
 	]
 };
