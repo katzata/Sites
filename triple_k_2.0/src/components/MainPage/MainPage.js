@@ -76,6 +76,10 @@ class MainPage {
 		this.content.footerText.appendChild(document.createTextNode(`Copywright © ${new Date().getFullYear()}`));
 	}
 
+	handlePageWidth() {
+		document.querySelector(".mainSection").style.width = `${window.innerWidth + 17}px`
+	}
+
 	handleCanvas() {
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
@@ -102,17 +106,16 @@ class MainPage {
 	}
 
 	handleEntryStage(stage) {
-		if (stage === 1) {
-			this.content.header.style.opacity = `${this.opacity.header}`;
-			this.content.footer.style.opacity = `${this.opacity.footer}`;
-			this.content.main.style.opacity = `${this.opacity.main}`;
+		if (this.opacity.header < 1 && this.mainCounter >= this.stages.first) {
+			this.content.pageContainer.style.opacity = "1";
 		}
 
 		if (stage === 2) {
-			this.content.pageContainer.style.height = "100%";
+			this.content.pageContainer.style.height = "100vh";
 		}
 
 		if (stage === 3) {
+			this.content.mainSection.style.height = "80vh";
 			this.content.footer.style.boxShadow = "0 0 18px 15px black";
 			this.content.footer.style.backgroundColor = `rgba(0, 0, 0, .8)`;
 			this.content.footerText.style.transform = `translateY(0vh)`;
@@ -130,32 +133,29 @@ class MainPage {
 			this.pagePrepared = true;
 		} else {
 			this.mainCounter++;
+			// this.handlePageWidth();
 		}
 
 		this.handleCanvas();
 		this.handleCrack();
 
-		if (this.opacity.header < 1 && this.mainCounter >= this.stages.first) {
-			this.opacity.header += this.opacity.increment;
-			this.opacity.main += this.opacity.increment;
-			this.opacity.footer += this.opacity.increment;
+		if (!this.pageDone) {
+			if (this.opacity.header < 1 && this.mainCounter >= this.stages.first) {
+				this.handleEntryStage(1);
+			}
 
-			this.handleEntryStage(1);
-		}
+			if (this.content.pageContainer.style.height !== "100%" && this.mainCounter >= this.stages.second) {
+				this.handleEntryStage(2);
+			}
 
-		if (this.content.pageContainer.style.height !== "100%" && this.mainCounter >= this.stages.second) {
-			this.handleEntryStage(2);
-		}
+			if (this.mainCounter === this.stages.third) {
+				this.handleEntryStage(3);
+			}
 
-		if (this.mainCounter === this.stages.third) {
-			this.handleEntryStage(3);
-		}
-
-		if (this.mainCounter === this.stages.fourth) {
-			this.handleEntryStage(4);
-		}
-
-		if (this.pageDone) {
+			if (this.mainCounter === this.stages.fourth) {
+				this.handleEntryStage(4);
+			}
+		} else {
 			if (this.viewing.mainSection === true) {
 				mainSection.render();
 			}
@@ -177,6 +177,10 @@ class MainPage {
 
 window.onwheel = (e) => {
 	console.log(e.deltaY)
+}
+
+window.ontouchstart = (e) => {
+	// alert(document.querySelector("footer").style.opacity)
 }
 
 export default MainPage;

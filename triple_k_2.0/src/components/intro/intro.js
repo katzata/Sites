@@ -12,7 +12,7 @@ whiteNoise.src = "../assets/audio/static.mp3";
 class Intro {
 	constructor() {
 		this.running = true;
-		this.mainCounter = 570;
+		this.mainCounter = 0;
 		this.offsetX = 0;
 		this.offsetY = 0;
 		this.logoX = canvas.width / 2;
@@ -20,10 +20,10 @@ class Intro {
 		this.logoCenterX = 0;
 		this.logoCenterY = 0;
 		this.logoAlpha = 0;
+		this.logoAlphaIncrement = 0.005;
 		this.logoSize = 0;
 		this.logoSizeDivider = 5;
 		this.fontSizeDivider = 19;
-		this.logoAlphaIncrement = 0.005;
 		this.textAlphaIncrement = 0.01;
 		this.volume = 0;
 		this.volumeIncrement = 0.005;

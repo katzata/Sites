@@ -6,11 +6,11 @@ let intro = new Intro();
 let mainPage = new MainPage();
 
 function loop() {
-	if (intro.running) {
-		intro.render();
-	} else {
+	// if (intro.running) {
+	// 	intro.render();
+	// } else {
 		mainPage.render();
-	}
+	// }
 
 	window.requestAnimationFrame(loop);
 }

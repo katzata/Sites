@@ -41,11 +41,13 @@ body {
 
 .pageContainer {
 	position: relative;
-	height: 28%;
+	height: 28vh;
 	display: grid;
 	grid-template-columns: 100%;
 	grid-template-rows: 12vh auto 8vh;
 	transition-duration: 1s;
+	transition-timing-function: ease-in-out;
+	opacity: 0;
 }
 
 header {
@@ -56,7 +58,6 @@ header {
 	align-items: center;
 	justify-content: center;
 	background-color: rgba(0, 0, 0, .7);
-	opacity: 0;
 	box-shadow: 0 0 18px 15px black;
 	z-index: 1;
 }
@@ -96,7 +97,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	overflow: hidden;
-	opacity: 0;
+	opacity: 1;
 }
 
 .hrTop, .hrBottom {
@@ -106,15 +107,14 @@ main {
 	height: 1px;
 	border: 0;
 	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0));
-	z-index: 1;
 }
 
 .hrTop {
-	top: 0;
+	bottom: 0;
 }
 
 .hrBottom {
-	bottom: 0;
+	top: 0;
 }
 
 footer {
@@ -125,8 +125,6 @@ footer {
 	align-items: center;
 	justify-content: center;
 	background-color: rgba(0, 0, 0, 0);
-	transition-duration: .8s;
-	opacity: 0;
 }
 
 .footerText {
@@ -135,5 +133,4 @@ footer {
 	transform: translateY(-8vh);
 	transition-duration: .8s;
 	transition-timing-function: ease-in-out;
-	opacity: 1;
 }
