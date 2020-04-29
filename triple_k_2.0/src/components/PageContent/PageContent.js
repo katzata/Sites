@@ -6,45 +6,23 @@ let getAge = () => {
 }
 
 module.exports = {
-	index: {
-		header: {
-			en: {
+	en: {
+		index: {
+			header: {
 				title: "KAMEN KASHCHIEV"
 			},
-			bg: {
-				title: "КАМЕН КАШЧИЕВ"
-			},
-			it: {
-				title: "KAMEN KASHCHIEV"
-			}
-		},
-		buttons: {
-			en: {
+			buttons: {
 				languageButton: "LANGUAGES",
 				navL: "ADDITIONAL",
 				navMiddle: "MAIN",
 				navR: "CERTIFICATES",
 			},
-			bg: {
-				languageButton: "",
-				navL: "ADDITIONAL",
-				navMiddle: "НАЧАЛО",
-				navR: "CERTIFICATES",
-			},
-			it: {
-				languageButton: "",
-				navL: "ADDIZIONALE",
-				navMiddle: "INIZIO",
-				navR: "CERTIFICATI",
+			subButtons: {
+
 			}
 		},
-		subButtons: {
-
-		}
-	},
-	mainSection: {
-		topArticle: {
-			en: {
+		mainSection: {
+			topArticle: {
 				title: "General Info",
 				name: {
 					title: "Name",
@@ -63,7 +41,32 @@ module.exports = {
 					content: "Highschool"
 				}
 			},
-			bg: {
+			bottomArticle: {
+				title: "About me",
+				content: `
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci porro debitis earum molestias obcaecati 
+					eos quos labore at, ducimus. Debitis quis perspiciatis doloremque qui reprehenderit consectetur quae, accusantium laborum illum!
+				`
+			}
+		}
+	},
+	bg: {
+		index: {
+			header: {
+				title: "КАМЕН КАШЧИЕВ"
+			},
+			buttons: {
+				languageButton: "",
+				navL: "ДОПЪЛНИТЕЛНО",
+				navMiddle: "НАЧАЛО",
+				navR: "СЕРТИФИКАТИ",
+			},
+			subButtons: {
+
+			}
+		},
+		mainSection: {
+			topArticle: {
 				title: "Генерална Информация",
 				name: {
 					title: "Име",
@@ -82,7 +85,32 @@ module.exports = {
 					content: "Средно образование"
 				}
 			},
-			it: {
+			bottomArticle: {
+				title: "За мен",
+				content: `
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci porro debitis earum molestias obcaecati 
+					eos quos labore at, ducimus. Debitis quis perspiciatis doloremque qui reprehenderit consectetur quae, accusantium laborum illum!
+				`
+			}
+		}
+	},
+	it: {
+		index: {
+			header: {
+				title: "KAMEN KASHCHIEV"
+			},
+			buttons: {
+				languageButton: "",
+				navL: "ADDIZIONALE",
+				navMiddle: "INIZIO",
+				navR: "CERTIFICATI",
+			},
+			subButtons: {
+
+			}
+		},
+		mainSection: {
+			topArticle: {
 				title: "Informazioni Generali",
 				name: {
 					title: "Nome",
@@ -100,24 +128,8 @@ module.exports = {
 					title: "Titolo di studio",
 					content: "Diploma di scuola secondaria superiore"
 				}
-			}
-		},
-		bottomArticle: {
-			en: {
-				title: "About me",
-				content: `
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci porro debitis earum molestias obcaecati 
-					eos quos labore at, ducimus. Debitis quis perspiciatis doloremque qui reprehenderit consectetur quae, accusantium laborum illum!
-				`
 			},
-			bg: {
-				title: "За мен",
-				content: `
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci porro debitis earum molestias obcaecati 
-					eos quos labore at, ducimus. Debitis quis perspiciatis doloremque qui reprehenderit consectetur quae, accusantium laborum illum!
-				`
-			},
-			it: {
+			bottomArticle: {
 				title: "Su di me",
 				content: `
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci porro debitis earum molestias obcaecati 

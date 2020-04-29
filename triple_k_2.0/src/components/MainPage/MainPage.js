@@ -49,9 +49,9 @@ class MainPage {
 
 		this.stages = {
 			first: 22,
-			second: 140,
-			third: 194,
-			fourth: 250
+			second: 100,
+			third: 154,
+			fourth: 200
 		}
 		
 		this.opacity = {
@@ -112,16 +112,17 @@ class MainPage {
 
 		if (stage === 2) {
 			this.content.pageContainer.style.height = "100vh";
+			this.content.mainSection.style.height = "80vh";
 		}
 
 		if (stage === 3) {
-			this.content.mainSection.style.height = "80vh";
 			this.content.footer.style.boxShadow = "0 0 18px 15px black";
 			this.content.footer.style.backgroundColor = `rgba(0, 0, 0, .8)`;
 			this.content.footerText.style.transform = `translateY(0vh)`;
 		}
 
 		if (stage === 4) {
+			this.content.pageContainer.style.transitionDuration = "0s";
 			this.pageDone = true;
 		}
 	}

@@ -68,7 +68,7 @@ header {
 	left: 50%;
 	height: 90%;
 	transform: translate(-50%, -50%);
-	transition-duration: 1.5s;
+	transition-duration: 1s;
 }
 
 .headerTitle, .headerTitle2 {
