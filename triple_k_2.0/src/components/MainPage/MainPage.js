@@ -157,28 +157,38 @@ class MainPage {
 				this.handleEntryStage(4);
 			}
 		} else {
+			let languageTemp;
+			
+			if (this.language.en === true) {
+				languageTemp = "en";
+			} else if (this.language.bg === true) {
+				languageTemp = "bg";
+			} else {
+				languageTemp = "it";
+			}
+
 			if (this.viewing.mainSection === true) {
-				mainSection.render();
+				mainSection.render(languageTemp);
 			}
 
 			if (this.viewing.cv1Section === true) {
-				CvSection1.render();
+				CvSection1.render(languageTemp);
 			}
 
 			if (this.viewing.cv2Section === true) {
-				CvSection2.render();
+				CvSection2.render(languageTemp);
 			}
 
 			if (this.viewing.certificatesSection === true) {
-				CertificatesSection.render();
+				CertificatesSection.render(languageTemp);
 			}
 		}
 	}
 }
 
-window.onwheel = (e) => {
-	console.log(e.deltaY)
-}
+// window.onwheel = (e) => {
+// 	console.log(e.deltaY)
+// }
 
 window.ontouchstart = (e) => {
 	// alert(document.querySelector("footer").style.opacity)

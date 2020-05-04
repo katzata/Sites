@@ -10,23 +10,37 @@ let bottomCtx;
 class MainSection {
 	constructor() {
 		this.prepared = false;
-		this.currentContent;
+		this.content;
 
 		this.content = {
 			mainSection: document.querySelector(".mainSection"),
 		}
+
+		this.test = "asd";
 	}
 
 	setLanguage(lang) {
 		if (lang === "en") {
-			this.currentContent = Content.en.mainSection.topArticle.title;
+			this.content = Content.en;
+		}
+
+		if (lang === "bg") {
+			this.content = Content.bg;
+		}
+
+		if (lang === "it") {
+			this.content = Content.it;
 		}
 	}
 
 	prepare() {
 		topCanvas = document.querySelector(".topArticleCanvas");
 		topCtx = topCanvas.getContext('2d');
-		this.content.mainSection.style.opacity = "1";
+
+		bottomCanvas = document.querySelector(".bottomArticleCanvas");
+		bottomCtx = bottomCanvas.getContext('2d');
+
+		document.querySelector(".mainSection").style.opacity = "1";
 	}
 
 	toggleOpacity() {
@@ -36,36 +50,81 @@ class MainSection {
 	}
 
 	handleCanvasSizes() {
-		topCanvas.width = window.innerWidth / 2.5;
+		topCanvas.width = 280;
 		topCanvas.height = 300/*window.innerWidth * topCanvas.height / topCanvas.width*/;
+
+		bottomCanvas.width = window.innerWidth - 20;
+	}
+
+	handletopCanvasLetterSwap() {
+		setInterval(() => {
+			this.test.charAt(Math.floor(Math.random() * 4)) = "ᚱ";
+		}, 1000)
 	}
 
 	handleTopCanvas() {
-		topCtx.font = `${topCanvas.width / 10.2}px SpectralSC-Regular`;
-
-		let offsetY = topCtx.measureText(`${this.currentContent}`).actualBoundingBoxAscent;
-		let offsetX = topCtx.measureText(`${this.currentContent}`).width;
-
 		topCtx.clearRect(0, 0, topCanvas.width, topCanvas.height)
+
 		topCtx.fillStyle = "white";
 		topCtx.transform(1, 0, 0, 1, 0, 0);
-		topCtx.fillText(`${this.currentContent}`, 0, offsetY);
-		topCtx.strokeStyle = "#ffffff";
+		
+		topCtx.font = `${topCanvas.width / 9.5}px SpectralSC-Regular`;
+		let offsetY = topCtx.measureText(`${this.content.mainSection.topArticle.title}`).actualBoundingBoxAscent;
+		let offsetX = 20;
+
+		topCtx.fillText(`${this.content.mainSection.topArticle.title}`, 0, offsetY);
+		topCtx.shadowColor = "white";
+		topCtx.shadowBlur = 8;
+
+		topCtx.font = `${topCanvas.width / 10.6}px SpectralSC-Regular`;
+		topCtx.fillText(`${this.content.mainSection.topArticle.name.title}`, 0, offsetY + 45);
+		topCtx.fillText(`${this.content.mainSection.topArticle.age.title}`, 0, offsetY + 105);
+		topCtx.fillText(`${this.content.mainSection.topArticle.location.title}`, 0, offsetY + 165);
+		topCtx.fillText(`${this.content.mainSection.topArticle.education.title}`, 0, offsetY + 225);
+
+		topCtx.font = `${topCanvas.width / 12.6}px SpectralSC-Regular`;
+		topCtx.fillText(`${this.content.mainSection.topArticle.name.content}`, offsetX, offsetY + 65);
+		topCtx.fillText(`${this.content.mainSection.topArticle.age.content}`, offsetX, offsetY + 126);
+		topCtx.fillText(`${this.content.mainSection.topArticle.location.content}`, offsetX, offsetY + 185);
+		topCtx.fillText(`${this.content.mainSection.topArticle.education.content}`, offsetX, offsetY + 245);
+
+		topCtx.font = `${topCanvas.width / 12.6}px rune`;
+		topCtx.fillText(`${this.content.mainSection.topArticle.name.content}`, offsetX, offsetY + 85);
 	}
 
-	render() {
+	handleBottomCanvas() {
+		bottomCtx.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height)
+
+		bottomCtx.fillStyle = "white";
+		bottomCtx.transform(1, 0, 0, 1, 0, 0);
+		
+		bottomCtx.font = `${bottomCanvas.height / 10.5}px SpectralSC-Regular`;
+		let offsetY = bottomCtx.measureText(`${this.content.mainSection.bottomArticle.title}`).actualBoundingBoxAscent;
+		let offsetX = 20;
+
+		bottomCtx.fillText(`${this.content.mainSection.bottomArticle.title}`, 0, offsetY);
+		bottomCtx.shadowColor = "white";
+		bottomCtx.shadowBlur = 8;
+
+		bottomCtx.font = `${bottomCanvas.height / 10.6}px SpectralSC-Regular`;
+		bottomCtx.fillText(`${this.content.mainSection.bottomArticle.content}`, -10, offsetY + offsetY);
+	}
+
+	render(languageTemp) {
 		if (!this.prepared) {
 			this.prepare();
+			this.setLanguage(languageTemp);
 		} else {
 			this.content.mainSection.style.transitionDuration = "0";
 		}
 
 		this.setLanguage("en");
 		this.handleCanvasSizes();
-		this.handleTopCanvas();
 
+		this.handleTopCanvas();
+		this.handleBottomCanvas();
 		
-		// console.log(Content)
+		console.log(Content);
 	}
 }
 

@@ -3,8 +3,11 @@
 	width: 100%;
 	height: 0vh;
 	padding: 20px;
-	transition-duration: 1s;
+	display: flex;
+	flex-direction: column;
+	transition-duration: 1.05s;
 	transition-timing-function: ease-in-out;
+	overflow-y: scroll;
 	opacity: 0;
 }
 
@@ -17,7 +20,9 @@
 }
 
 .topArticleCanvas {
-	background-color: red;
+	width: 260px;
+	height: 280px;
+	margin-top: 30px;
 }
 
 .topArticleImg {
@@ -25,5 +30,7 @@
 }
 
 .bottomArticleCanvas {
+	/*width: 90%;*/
+	margin: 40px auto;
 	background-color: purple;
 }
