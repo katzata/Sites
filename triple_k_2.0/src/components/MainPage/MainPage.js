@@ -116,7 +116,7 @@ class MainPage {
 		}
 
 		if (stage === 3) {
-			this.content.footer.style.boxShadow = "0 0 18px 15px black";
+			this.content.footer.style.boxShadow = "0 0 28px 25px black";
 			this.content.footer.style.backgroundColor = `rgba(0, 0, 0, .8)`;
 			this.content.footerText.style.transform = `translateY(0vh)`;
 		}
