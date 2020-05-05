@@ -8,6 +8,7 @@ class MainSection {
 
 		this.content = {
 			mainSection: undefined,
+			topArticle: undefined
 		}
 	}
 
@@ -27,11 +28,22 @@ class MainSection {
 
 	prepare() {
 		this.content.mainSection = document.querySelector(".mainSection");
+		this.content.topArticle = document.querySelector(".topArticle");
 		
 		this.content.mainSection.style.backgroundColor = "rgba(0, 0, 0, .5)";
 		this.content.mainSection.style.overflowY = "scroll";
 		this.content.mainSection.style.opacity = "1";
 		this.sectionDone = true;
+	}
+
+	prepareText() {
+		console.log()
+		for (let i = 0; i < this.text.mainSection.topArticle.title.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.title[i];
+
+			document.querySelector(".topArticleTitleContainer").appendChild(span);
+		}
 	}
 
 	toggleOpacity() {
@@ -47,9 +59,7 @@ class MainSection {
 	}
 
 	handleTopArticle() {
-		// for (let i = 0; i < ) {
-
-		// }
+		
 	}
 
 	handletopCanvasLetterSwap() {
@@ -70,6 +80,7 @@ class MainSection {
 		if (!this.sectionDone) {
 			this.prepare();
 			this.setLanguage(languageTemp);
+			this.prepareText();
 			
 		} else {
 			this.content.mainSection.style.transitionDuration = "0";
@@ -77,7 +88,7 @@ class MainSection {
 
 		this.setLanguage("en");
 		
-		// console.log(Content);
+		console.log(this.text.mainSection.topArticle.title);
 	}
 }
 
