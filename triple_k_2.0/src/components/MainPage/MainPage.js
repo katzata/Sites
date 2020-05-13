@@ -127,6 +127,52 @@ class MainPage {
 		}
 	}
 
+	handleMiniIntro() {
+		if (this.opacity.header < 1 && this.mainCounter >= this.stages.first) {
+			this.handleEntryStage(1);
+		}
+
+		if (this.content.pageContainer.style.height !== "100%" && this.mainCounter >= this.stages.second) {
+			this.handleEntryStage(2);
+		}
+
+		if (this.mainCounter === this.stages.third) {
+			this.handleEntryStage(3);
+		}
+
+		if (this.mainCounter === this.stages.fourth) {
+			this.handleEntryStage(4);
+		}
+	}
+
+	handleInitialPage() {
+		let languageTemp;
+
+		if (this.language.en === true) {
+			languageTemp = "en";
+		} else if (this.language.bg === true) {
+			languageTemp = "bg";
+		} else {
+			languageTemp = "it";
+		}
+
+		if (this.viewing.mainSection === true) {
+			mainSection.render(languageTemp);
+		}
+
+		if (this.viewing.cv1Section === true) {
+			CvSection1.render(languageTemp);
+		}
+
+		if (this.viewing.cv2Section === true) {
+			CvSection2.render(languageTemp);
+		}
+
+		if (this.viewing.certificatesSection === true) {
+			CertificatesSection.render(languageTemp);
+		}
+	}
+
 	render() {
 		if (!this.pagePrepared) {
 			this.prepare();
@@ -141,47 +187,9 @@ class MainPage {
 		this.handleCrack();
 
 		if (!this.pageDone) {
-			if (this.opacity.header < 1 && this.mainCounter >= this.stages.first) {
-				this.handleEntryStage(1);
-			}
-
-			if (this.content.pageContainer.style.height !== "100%" && this.mainCounter >= this.stages.second) {
-				this.handleEntryStage(2);
-			}
-
-			if (this.mainCounter === this.stages.third) {
-				this.handleEntryStage(3);
-			}
-
-			if (this.mainCounter === this.stages.fourth) {
-				this.handleEntryStage(4);
-			}
+			this.handleMiniIntro();
 		} else {
-			let languageTemp;
-			
-			if (this.language.en === true) {
-				languageTemp = "en";
-			} else if (this.language.bg === true) {
-				languageTemp = "bg";
-			} else {
-				languageTemp = "it";
-			}
-
-			if (this.viewing.mainSection === true) {
-				mainSection.render(languageTemp);
-			}
-
-			if (this.viewing.cv1Section === true) {
-				CvSection1.render(languageTemp);
-			}
-
-			if (this.viewing.cv2Section === true) {
-				CvSection2.render(languageTemp);
-			}
-
-			if (this.viewing.certificatesSection === true) {
-				CertificatesSection.render(languageTemp);
-			}
+			this.handleInitialPage();
 		}
 	}
 }

@@ -1,0 +1,35 @@
+.topArticleContainer {
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	align-items: center;
+	justify-items: center;
+	color: white;
+}
+
+.topArticle {
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	font-family: SpectralSC-Regular;
+	font-size: 1.15em;
+	/*border: 1px solid white;*/
+}
+
+.topArticleTitle {
+	
+}
+
+.topArticleSubTitle {
+	margin-top: 15px;
+}
+
+.topArticleText {
+	margin-left: 10px;
+}
+
+.topArticleLetters {
+	background-color: rgba(0, 0, 0, .28);
+	box-shadow: 0 0 3px 2px rgba(0, 0, 0, .28);
+	border-radius: 50%;
+}

@@ -36,13 +36,87 @@ class MainSection {
 		this.sectionDone = true;
 	}
 
-	prepareText() {
-		console.log()
+	prepareTopArticle() {
 		for (let i = 0; i < this.text.mainSection.topArticle.title.length; i++) {
 			let span = document.createElement("span");
 			span.textContent = this.text.mainSection.topArticle.title[i];
+			span.classList.add("topArticleLetters");
 
-			document.querySelector(".topArticleTitleContainer").appendChild(span);
+			document.querySelector(".topArticleTitle").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.name.title.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.name.title[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleSubTitle1").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.name.content.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.name.content[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleText1").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.age.title.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.age.title[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleSubTitle2").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.age.content.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.age.content[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleText2").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.location.title.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.location.title[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleSubTitle3").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.location.content.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.location.content[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleText3").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.education.title.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.education.title[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleSubTitle4").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.topArticle.education.content.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.education.content[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleText4").appendChild(span);
+		}
+	}
+
+	prepareBottomArticle() {
+		for (let i = 0; i < this.text.mainSection.topArticle.education.content.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.topArticle.education.content[i];
+			span.classList.add("topArticleLetters");
+
+			document.querySelector(".topArticleText4").appendChild(span);
 		}
 	}
 
@@ -80,7 +154,7 @@ class MainSection {
 		if (!this.sectionDone) {
 			this.prepare();
 			this.setLanguage(languageTemp);
-			this.prepareText();
+			this.prepareTopArticle();
 			
 		} else {
 			this.content.mainSection.style.transitionDuration = "0";
@@ -88,7 +162,7 @@ class MainSection {
 
 		this.setLanguage("en");
 		
-		console.log(this.text.mainSection.topArticle.title);
+		console.log(this.text.mainSection.topArticle);
 	}
 }
 
