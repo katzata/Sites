@@ -7,10 +7,7 @@
 	flex-direction: column;
 	transition-duration: 1.05s;
 	transition-timing-function: ease-in-out;
-	overflow-y: scroll;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
 	opacity: 0;
-}
-
-.topArticleImg {
-	width: 70%;
 }

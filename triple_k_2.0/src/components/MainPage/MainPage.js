@@ -34,6 +34,9 @@ class MainPage {
 			title2: document.querySelector(".headerTitle2"),
 			main: document.querySelector("main"),
 			nav: document.querySelector("nav"),
+			navSections: document.querySelectorAll(".navSections"),
+			navSectionL: document.querySelector(".navSectionL"),
+			navSectionR: document.querySelector(".navSectionR"),
 			hrTop: document.querySelector(".hrTop"),
 			mainSection: document.querySelector(".mainSection"),
 			hrBottom: document.querySelector(".hrBottom"),
@@ -76,9 +79,9 @@ class MainPage {
 		this.content.footerText.appendChild(document.createTextNode(`Copywright © ${new Date().getFullYear()}`));
 	}
 
-	handlePageWidth() {
-		document.querySelector(".mainSection").style.width = `${window.innerWidth + 17}px`
-	}
+	// handlePageWidth() {
+	// 	document.querySelector(".mainSection").style.width = `${window.innerWidth + 17}px`
+	// }
 
 	handleCanvas() {
 		canvas.width = window.innerWidth;
@@ -173,6 +176,22 @@ class MainPage {
 		}
 	}
 
+	handleNavHover() {
+		for (let i = this.content.navSections.length - 1; i >= 0; i--) {
+			this.content.navSections[i].addEventListener("mouseenter", () => {
+				if (this.content.navSections[i].name === "navSections navSectionL") {
+					console.log("x")
+				} else {
+					console.log("z")
+				}
+			})
+
+			this.content.navSections[i].addEventListener("mouseleave", () => {
+				
+			})
+		}
+	}
+
 	render() {
 		if (!this.pagePrepared) {
 			this.prepare();
@@ -189,6 +208,7 @@ class MainPage {
 		if (!this.pageDone) {
 			this.handleMiniIntro();
 		} else {
+			this.handleNavHover();
 			this.handleInitialPage();
 		}
 	}

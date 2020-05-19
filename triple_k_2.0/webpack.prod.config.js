@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Handlebars = require("handlebars");
 const CopyPlugin = require('copy-webpack-plugin');
 
-
 module.exports = {
 	entry: './src/index.js',
 	output: {

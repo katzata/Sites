@@ -7,6 +7,7 @@ class MainSection {
 		this.text;
 
 		this.content = {
+			nav: undefined,
 			mainSection: undefined,
 			topArticle: undefined
 		}
@@ -27,11 +28,13 @@ class MainSection {
 	}
 
 	prepare() {
+		this.content.nav = document.querySelector("nav");
 		this.content.mainSection = document.querySelector(".mainSection");
 		this.content.topArticle = document.querySelector(".topArticle");
 		
+		this.content.nav.style.opacity = "1";
 		this.content.mainSection.style.backgroundColor = "rgba(0, 0, 0, .5)";
-		this.content.mainSection.style.overflowY = "scroll";
+		this.content.mainSection.style.overflowY = "auto";
 		this.content.mainSection.style.opacity = "1";
 		this.sectionDone = true;
 	}
@@ -111,12 +114,20 @@ class MainSection {
 	}
 
 	prepareBottomArticle() {
-		for (let i = 0; i < this.text.mainSection.topArticle.education.content.length; i++) {
+		for (let i = 0; i < this.text.mainSection.bottomArticle.title.length; i++) {
 			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.education.content[i];
-			span.classList.add("topArticleLetters");
+			span.textContent = this.text.mainSection.bottomArticle.title[i];
+			span.classList.add("bottomArticleLetters");
 
-			document.querySelector(".topArticleText4").appendChild(span);
+			document.querySelector(".bottomArticleTitle").appendChild(span);
+		}
+
+		for (let i = 0; i < this.text.mainSection.bottomArticle.content.length; i++) {
+			let span = document.createElement("span");
+			span.textContent = this.text.mainSection.bottomArticle.content[i];
+			span.classList.add("bottomArticleLetters");
+
+			document.querySelector(".bottomArticleText").appendChild(span);
 		}
 	}
 
@@ -136,18 +147,8 @@ class MainSection {
 		
 	}
 
-	handletopCanvasLetterSwap() {
-		// setInterval(() => {
-		// 	this.test.charAt(Math.floor(Math.random() * 4)) = "ᚱ";
-		// }, 1000)
-	}
+	handleBottomArticle() {
 
-	handleTopCanvas() {
-		
-	}
-
-	handleBottomCanvas() {
-		
 	}
 
 	render(languageTemp) {
@@ -155,6 +156,7 @@ class MainSection {
 			this.prepare();
 			this.setLanguage(languageTemp);
 			this.prepareTopArticle();
+			this.prepareBottomArticle();
 			
 		} else {
 			this.content.mainSection.style.transitionDuration = "0";
@@ -162,7 +164,7 @@ class MainSection {
 
 		this.setLanguage("en");
 		
-		console.log(this.text.mainSection.topArticle);
+		// console.log(this.text.mainSection.topArticle);
 	}
 }
 

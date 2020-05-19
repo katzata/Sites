@@ -22,6 +22,7 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
+	letter-spacing: 1px;
 }
 
 html {
@@ -74,7 +75,7 @@ header {
 .headerTitle, .headerTitle2 {
 	position: absolute;
 	font-family: SpectralSC-Regular;
-	font-size: 1.3em;
+	font-size: 2em;
 	font-weight: normal;
 	text-shadow: 0 0 10px white;
 }
@@ -82,13 +83,15 @@ header {
 nav {
 	position: absolute;
 	bottom: 0;
-	width: 240px;
+	width: 300px;
 	display: grid;
-	grid-template-columns: 43% 43%;
-	grid-column-gap: 14%;
+	grid-template-columns: 44% 44%;
+	grid-column-gap: 12%;
 	color: white;
 	transform: translateY(50%);
-	opacity: 1;
+	transition-duration: 1s;
+	opacity: 0;
+	user-select: none;
 	z-index: 1;
 }
 
@@ -110,8 +113,8 @@ nav {
 }
 
 .navSectionTitle {
-	font-size: 17px;
-	line-height: 14px;
+	font-size: 1.2em;
+	line-height: 1.1em;
 }
 
 .navSectionLButton, .navSectionRButton {
@@ -139,6 +142,7 @@ main {
 	align-items: center;
 	overflow: hidden;
 	opacity: 1;
+	user-select: none;
 }
 
 .hrTop, .hrBottom {

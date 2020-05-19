@@ -22,6 +22,7 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
+	letter-spacing: 1px;
 }
 
 html {
@@ -74,7 +75,7 @@ header {
 .headerTitle, .headerTitle2 {
 	position: absolute;
 	font-family: SpectralSC-Regular;
-	font-size: 1.3em;
+	font-size: 2em;
 	font-weight: normal;
 	text-shadow: 0 0 10px white;
 }
@@ -82,7 +83,7 @@ header {
 nav {
 	position: absolute;
 	bottom: 0;
-	width: 240px;
+	width: 290px;
 	display: grid;
 	grid-template-columns: 43% 43%;
 	grid-column-gap: 14%;
@@ -110,8 +111,8 @@ nav {
 }
 
 .navSectionTitle {
-	font-size: 17px;
-	line-height: 14px;
+	font-size: 1.2em;
+	line-height: 1.1em;
 }
 
 .navSectionLButton, .navSectionRButton {
@@ -185,15 +186,11 @@ footer {
 	flex-direction: column;
 	transition-duration: 1.05s;
 	transition-timing-function: ease-in-out;
-	overflow-y: scroll;
+	overflow-y: auto;
 	opacity: 0;
 }
-
-.topArticleImg {
-	width: 70%;
-}
 .topArticleContainer {
-	padding: 20px;
+	padding: 10px 20px 20px;
 	display: grid;
 	grid-template-columns: 50% 50%;
 	align-items: center;
@@ -202,15 +199,62 @@ footer {
 }
 
 .topArticle {
-	/*margin: auto;
+	margin: auto;
 	display: flex;
 	flex-direction: column;
 	font-family: SpectralSC-Regular;
-	font-size: 1.15em;
-	border: 1px solid white;*/
 }
 
 .topArticleTitle {
-	
+	font-size: 1.7em;
+	line-height: 1.6em;
+}
+
+.topArticleSubTitle {
+	margin-top: 30px;
+	font-size: 1.5em;
+	line-height: 1.4em;
+}
+
+.topArticleText {
+	margin-left: 20px;
+	font-size: 1.3em;
+	line-height: 1.2em;
+}
+
+.topArticleLetters {
+	background-color: rgba(0, 0, 0, .28);
+	box-shadow: 0 0 3px 2px rgba(0, 0, 0, .28);
+	border-radius: 50%;
+}
+
+.topArticleImgContainer {
+	height: 100%;
+	width: 100%;
+	display: flex;
+}
+
+.topArticleImg {
+	width: 190px;
+	height: 277px;
+	margin: auto;
+}
+
+.bottomArticle {
+	width: 90%;
+	margin: 80px auto 0;
+	color: white;
+}
+
+.bottomArticleTitle {
+	font-size: 1.6em;
+	line-height: 1.5em;
+}
+
+.bottomArticleText {
+	width: 94%;
+	margin: 0 auto;
+	font-size: 1.3em;
+	line-height: 1.2em;
 }
 
