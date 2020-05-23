@@ -80,59 +80,6 @@ header {
 	text-shadow: 0 0 10px white;
 }
 
-nav {
-	position: absolute;
-	bottom: 0;
-	width: 300px;
-	display: grid;
-	grid-template-columns: 44% 44%;
-	grid-column-gap: 12%;
-	color: white;
-	transform: translateY(50%);
-	transition-duration: 1s;
-	opacity: 0;
-	user-select: none;
-	z-index: 1;
-}
-
-.navSectionL, .navSectionR {
-	position: relative;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	background-color: black;
-	text-align: center;
-	box-shadow: 0 0 12px 6px black;
-	border-radius: 6px;
-}
-
-.navSectionLButtonContainer, .navSectionRButtonContainer {
-	position: relative;
-	width: 100%;
-	height: auto;
-}
-
-.navSectionTitle {
-	font-size: 1.2em;
-	line-height: 1.1em;
-}
-
-.navSectionLButton, .navSectionRButton {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	opacity: 0;
-}
-
-
-.navButtonMain {
-	position: absolute;
-	left: 50%;
-	top: 120%;
-	transform: translateX(-50%);
-	opacity: 0;
-}
-
 main {
 	position: relative;
 	width: 100%;

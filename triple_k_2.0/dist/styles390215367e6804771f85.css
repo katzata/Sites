@@ -80,57 +80,6 @@ header {
 	text-shadow: 0 0 10px white;
 }
 
-nav {
-	position: absolute;
-	bottom: 0;
-	width: 290px;
-	display: grid;
-	grid-template-columns: 43% 43%;
-	grid-column-gap: 14%;
-	color: white;
-	transform: translateY(50%);
-	opacity: 1;
-	z-index: 1;
-}
-
-.navSectionL, .navSectionR {
-	position: relative;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	background-color: black;
-	text-align: center;
-	box-shadow: 0 0 12px 6px black;
-	border-radius: 6px;
-}
-
-.navSectionLButtonContainer, .navSectionRButtonContainer {
-	position: relative;
-	width: 100%;
-	height: auto;
-}
-
-.navSectionTitle {
-	font-size: 1.2em;
-	line-height: 1.1em;
-}
-
-.navSectionLButton, .navSectionRButton {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	opacity: 0;
-}
-
-
-.navButtonMain {
-	position: absolute;
-	left: 50%;
-	top: 120%;
-	transform: translateX(-50%);
-	opacity: 0;
-}
-
 main {
 	position: relative;
 	width: 100%;
@@ -140,6 +89,7 @@ main {
 	align-items: center;
 	overflow: hidden;
 	opacity: 1;
+	user-select: none;
 }
 
 .hrTop, .hrBottom {
@@ -177,6 +127,75 @@ footer {
 	transition-timing-function: ease-in-out;
 }
 
+nav {
+	position: absolute;
+	bottom: 0px;
+	width: 320px;
+	height: 20px;
+	display: flex;
+	color: white;
+	transform: translateY(50%);
+	transition-duration: 1s;
+	opacity: 0;
+	user-select: none;
+	z-index: 1;
+}
+
+.navSectionL, .navSectionR {
+	position: relative;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	background-color: black;
+	text-align: center;
+	box-shadow: 0 0 12px 6px black;
+	border-radius: 6px;
+}
+
+.navSectionR {
+	margin-left: 60px;
+}
+
+.navSectionTitle {
+	font-size: 1.15em;
+	line-height: 1.05em;
+}
+
+.navSectionLButton, .navSectionRButton {
+	/*position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;*/
+	width: auto;
+	margin: 2px 0;
+	font-family: SpectralSC-Regular;
+	color: white;
+	font-size: 14px;
+	line-height: 14px;
+	background-color: black;
+	box-shadow: 0 0 2px 4px black;
+	border: none;
+}
+
+.navSectionLButton1 {
+	
+}
+
+.navButtonMain {
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	width: 58px;
+	height: 22px;
+	color: white;
+	font-family: SpectralSC-Regular;
+	font-size: 15px;
+	background-color: rgba(0, 0, 0, 0);
+	transform: translateX(-50%);
+	border: none;
+	/*opacity: 0;*/
+}
+
 .mainSection {
 	position: relative;
 	width: 100%;
@@ -186,7 +205,8 @@ footer {
 	flex-direction: column;
 	transition-duration: 1.05s;
 	transition-timing-function: ease-in-out;
-	overflow-y: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
 	opacity: 0;
 }
 .topArticleContainer {
