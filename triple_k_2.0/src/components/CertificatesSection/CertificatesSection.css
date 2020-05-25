@@ -1,0 +1,80 @@
+.certificatesSection {
+	padding: 30px 10px 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	overflow-y: auto;
+}
+
+.certificateContainer {
+	position: relative;
+	width: 100%;
+	/*height: 100%;*/
+	max-width: 280px;
+	/*max-height: 280px;*/
+	margin: 20px 15px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.thumbnailContainer {
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	transition-duration: .2s;
+	box-shadow: 0 0 10px 9px;
+}
+
+.thumbnailSubContainer {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+}
+
+.thumbnailTitle {
+	margin: 2px 0;
+	color: white;
+	text-align: center;
+	font-family: "SpectralSC-extra-light";
+	background-color: black;
+}
+
+.thumbnailCover {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, .1);
+	transition-duration: .2s;
+}
+
+.thumbnailFlash {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	height: 116%;
+	transform: rotate(10deg) translateX(-50px) translateY(-40px);
+	transition-duration: 1s;
+	box-shadow: 0 0 7px 3px rgba(255, 255, 255, .8);
+}
+
+.pdfContainer {
+	width: 100%;
+	position: absolute;
+	background-color: red;
+}
+
+.pdf {
+	opacity: 0;
+}
+
+.pdfButtonExit {
+	position: absolute;
+	opacity: 0;
+}

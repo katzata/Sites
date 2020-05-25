@@ -19,6 +19,20 @@
 	src: url(assets/704ce25bdaac966909a02c7d38fba854.woff2) format("woff2");
 }
 
+@font-face {
+	font-family: "SpectralSC-light";
+	src: url(assets/fb2166af9c32247198a035bfb71ac71b.ttf) format("ttf");
+	src: url(assets/90a644896f410c554ab7e1b6d255420e.woff) format("woff");
+	src: url(assets/c233c557869e02e9c1548393c4a535f3.woff2) format("woff2");
+}
+
+@font-face {
+	font-family: "SpectralSC-extra-light";
+	src: url(assets/01ccfc209bb049ba932431af3f3186bc.ttf) format("ttf");
+	src: url(assets/b9bdeb92873abef94e971a15a768a770.woff) format("woff");
+	src: url(assets/befa0501494b9ffa7f00ced08157dfc9.woff2) format("woff2");
+}
+
 * {
 	margin: 0;
 	box-sizing: border-box;
@@ -88,7 +102,6 @@ main {
 	flex-direction: column;
 	align-items: center;
 	overflow: hidden;
-	opacity: 1;
 	user-select: none;
 }
 
@@ -133,6 +146,7 @@ nav {
 	width: 320px;
 	height: 20px;
 	display: flex;
+	justify-content: center;
 	color: white;
 	transform: translateY(50%);
 	transition-duration: 1s;
@@ -143,72 +157,101 @@ nav {
 
 .navSectionL, .navSectionR {
 	position: relative;
-	width: 50%;
+	width: 35%;
+	height: 18px;
 	display: flex;
 	flex-direction: column;
-	background-color: black;
+	align-items: center;
 	text-align: center;
-	box-shadow: 0 0 12px 6px black;
-	border-radius: 6px;
 }
 
 .navSectionR {
-	margin-left: 60px;
+	height: 60px;
+	margin-left: 70px;
 }
 
 .navSectionTitle {
-	font-size: 1.15em;
-	line-height: 1.05em;
+	position: relative;
+	width: 100%;
+	display: inline-block;
+	font-family: "SpectralSC-light";
+	font-size: 1.1em;
+	line-height: 1em;
+	background-color: black;
+	box-shadow: 0 0 8px 5px black;
+	border-radius: 6px;
+	z-index: 3;
 }
 
 .navSectionLButton, .navSectionRButton {
-	/*position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	opacity: 0;*/
-	width: auto;
-	margin: 2px 0;
+	position: absolute;
+	top: 0;
+	height: 14px;
+	margin: 3px 0;
+	padding: 0;
 	font-family: SpectralSC-Regular;
-	color: white;
-	font-size: 14px;
-	line-height: 14px;
+	color: #EEEEEE;
+	font-size: 13px;
+	line-height: 13px;
 	background-color: black;
-	box-shadow: 0 0 2px 4px black;
+	transition-duration: .2s;
+	border-radius: 3px;
 	border: none;
+	box-shadow: none;
+}
+
+.navSectionLButton:focus, .navSectionRButton:focus {
+	outline: none;
 }
 
 .navSectionLButton1 {
-	
+	z-index: 2;
+}
+
+.navSectionLButton2 {
+	z-index: 1;
+}
+
+.navSectionLButton3 {
+	z-index: 0;
+}
+
+.navSectionRButton1 {
+	z-index: 0;
+}
+
+.buttonSpan {
+	margin: 0 2px;
 }
 
 .navButtonMain {
 	position: absolute;
 	left: 50%;
-	top: 100%;
+	bottom: -70%;
 	width: 58px;
 	height: 22px;
 	color: white;
-	font-family: SpectralSC-Regular;
+	font-family: "SpectralSC-light";
 	font-size: 15px;
 	background-color: rgba(0, 0, 0, 0);
 	transform: translateX(-50%);
 	border: none;
-	/*opacity: 0;*/
 }
-
 .mainSection {
 	position: relative;
 	width: 100%;
-	height: 0vh;
+	height: 100%;
 	padding: 20px;
+	padding-left: 27px;
 	display: flex;
 	flex-direction: column;
 	transition-duration: 1.05s;
 	transition-timing-function: ease-in-out;
-	overflow-y: hidden;
+	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 	opacity: 0;
 }
+
 .topArticleContainer {
 	padding: 10px 20px 20px;
 	display: grid;
@@ -262,7 +305,7 @@ nav {
 
 .bottomArticle {
 	width: 90%;
-	margin: 80px auto 0;
+	margin: 60px auto 5px;
 	color: white;
 }
 
@@ -275,6 +318,60 @@ nav {
 	width: 94%;
 	margin: 0 auto;
 	font-size: 1.3em;
-	line-height: 1.2em;
+	line-height: 1.1em;
+	text-align: justify;
+}
+.cvSection1 {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.certificatesSection {
+	padding: 30px 10px 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	overflow-y: auto;
 }
 
+.certificateContainer {
+	position: relative;
+	width: 100%;
+	/*height: 100%;*/
+	max-width: 280px;
+	/*max-height: 280px;*/
+	margin: 20px 15px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.certificateThumbnail {
+
+	transition-duration: .2s;
+	box-shadow: 0 0 10px 9px;
+}
+
+.thumbnailTitle {
+	margin: 6px;
+	color: white;
+	font-size: 1.05em;
+	font-family: "SpectralSC-extra-light";
+}
+
+.pdfContainer {
+	position: absolute;	
+}
+
+.pdf {
+	opacity: 0;
+}
+
+.pdfButtonExit {
+	position: absolute;
+	opacity: 0;
+}

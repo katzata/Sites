@@ -2,7 +2,7 @@ nav {
 	position: absolute;
 	bottom: 0px;
 	width: 320px;
-	height: 30px;
+	height: 20px;
 	display: flex;
 	justify-content: center;
 	color: white;
@@ -15,32 +15,28 @@ nav {
 
 .navSectionL, .navSectionR {
 	position: relative;
-	width: 36%;
-	height: 20px;
-	margin: 5px 0;
+	width: 35%;
+	height: 18px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
 }
 
-.navSectionL:hover {
-	height: 90px;
-}
-
 .navSectionR {
 	height: 60px;
-	margin-left: 60px;
+	margin-left: 70px;
 }
 
 .navSectionTitle {
 	position: relative;
 	width: 100%;
 	display: inline-block;
+	font-family: "SpectralSC-light";
 	font-size: 1.1em;
 	line-height: 1em;
 	background-color: black;
-	box-shadow: 0 0 10px 5px black;
+	box-shadow: 0 0 8px 5px black;
 	border-radius: 6px;
 	z-index: 3;
 }
@@ -52,119 +48,50 @@ nav {
 	margin: 3px 0;
 	padding: 0;
 	font-family: SpectralSC-Regular;
-	color: white;
-	font-size: 14px;
-	line-height: 14px;
+	color: #EEEEEE;
+	font-size: 13px;
+	line-height: 13px;
+	background-color: black;
+	transition-duration: .2s;
 	border-radius: 3px;
 	border: none;
 	box-shadow: none;
 }
 
+.navSectionLButton:focus, .navSectionRButton:focus {
+	outline: none;
+}
+
 .navSectionLButton1 {
 	z-index: 2;
-	transition-duration: .15s;
 }
 
 .navSectionLButton2 {
 	z-index: 1;
-	transition-duration: .15s;
 }
 
 .navSectionLButton3 {
 	z-index: 0;
-	transition-duration: .15s;
 }
 
 .navSectionRButton1 {
 	z-index: 0;
 }
 
-/*.navSectionLButton1 {
-	top: 20px;
-}
-
-.navSectionLButton2 {
-	top: 40px;
-}
-
-.navSectionRButton1 {
-	top: 20px;
-}*/
-
 .buttonSpan {
-	margin: 0 4px;
+	margin: 0 2px;
 }
 
 .navButtonMain {
 	position: absolute;
 	left: 50%;
-	bottom: 10%;
+	bottom: -70%;
 	width: 58px;
 	height: 22px;
 	color: white;
-	font-family: SpectralSC-Regular;
+	font-family: "SpectralSC-light";
 	font-size: 15px;
 	background-color: rgba(0, 0, 0, 0);
 	transform: translateX(-50%);
 	border: none;
-	/*opacity: 0;*/
-}
-
-.mainSection {
-	position: relative;
-	width: 100%;
-	height: 0vh;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	transition-duration: 1.05s;
-	transition-timing-function: ease-in-out;
-	overflow-y: hidden;
-	-webkit-overflow-scrolling: touch;
-	opacity: 0;
-}
-
-@keyframes slideLeftNavA {
-	0% {transform: translateY(0px);}
-	80% {
-		transform: translateY(22px);
-	}
-	/*40% {}
-	60% {}
-	80% {}*/
-	100% {
-		transform: translateY(22px);
-		background-color: black;
-		box-shadow: 0 0 4px 4px black;
-	}
-}
-
-@keyframes slideLeftNavB {
-	0% {transform: translateY(0px);}
-	80% {
-		transform: translateY(42px);
-	}
-	/*40% {}
-	60% {}
-	80% {}*/
-	100% {
-		transform: translateY(42px);
-		background-color: black;
-		box-shadow: 0 0 4px 4px black;
-	}
-}
-
-@keyframes slideLeftNavC {
-	0% {transform: translateY(0px);}
-	80% {
-		transform: translateY(62px);
-	}
-	/*40% {}
-	60% {}
-	80% {}*/
-	100% {
-		transform: translateY(62px);
-		background-color: black;
-		box-shadow: 0 0 4px 4px black;
-	}
 }

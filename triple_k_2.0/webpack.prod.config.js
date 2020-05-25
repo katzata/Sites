@@ -20,7 +20,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(png|ttf|woff|woff2)$/,
+				test: /\.(png|jpg|ttf|woff|woff2|pdf)$/,
 				loader: "file-loader",
 				options: {
 					outputPath: "assets",
@@ -58,8 +58,7 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			title: "TRIPLE K",
-			template: "src/index.hbs",
-
+			template: "src/index.hbs"
 		}),
 		new CopyPlugin([
 			{ 

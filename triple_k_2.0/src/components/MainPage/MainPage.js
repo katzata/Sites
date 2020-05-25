@@ -2,6 +2,7 @@ import "./MainPage.css";
 import Content from "../PageContent/PageContent";
 import MainSection from "../MainSection/MainSection";
 import CvSection1 from "../CvSection1/CvSection1";
+import CertificatesSection from "../CertificatesSection/CertificatesSection";
 
 let canvas;
 let ctx;
@@ -13,13 +14,13 @@ const whiteNoise = document.createElement("audio");
 whiteNoise.src = "../assets/audio/static.mp3";
 
 const mainSection = new MainSection();
+const cvSection1 = new CvSection1();
+const certificatesSection = new CertificatesSection();
 
 class MainPage {
 	constructor() {
 		this.counters = {
 			main: 0,
-			navL: 0,
-			navR: 0,
 			test: 0
 		}
 
@@ -43,6 +44,8 @@ class MainPage {
 			navSections: document.querySelectorAll(".navSections"),
 			navSectionL: document.querySelector(".navSectionL"),
 			navSectionR: document.querySelector(".navSectionR"),
+			navSectionButtonsL: document.querySelectorAll(".navSectionLButton"),
+			navSectionButtonsR: document.querySelectorAll(".navSectionRButton"),
 			hrTop: document.querySelector(".hrTop"),
 			mainSection: document.querySelector(".mainSection"),
 			hrBottom: document.querySelector(".hrBottom"),
@@ -81,10 +84,10 @@ class MainPage {
 		}
 
 		this.viewing = {
-			mainSection: true,
-			cv1Section: false,
-			cv2Section: false,
-			certificatesSection: false
+			mainSection: false,
+			cvSection1: false,
+			cvSection2: false,
+			certificatesSection: true
 		}
 	}
 
@@ -143,7 +146,6 @@ class MainPage {
 
 		if (stage === 2) {
 			this.content.pageContainer.style.height = "100vh";
-			this.content.mainSection.style.height = "80vh";
 		}
 
 		if (stage === 3) {
@@ -154,6 +156,7 @@ class MainPage {
 
 		if (stage === 4) {
 			this.content.pageContainer.style.transitionDuration = "0s";
+			this.content.nav.style.opacity = "1";
 			this.pageDone = true;
 		}
 	}
@@ -191,16 +194,16 @@ class MainPage {
 			mainSection.render(languageTemp);
 		}
 
-		if (this.viewing.cv1Section === true) {
-			CvSection1.render(languageTemp);
+		if (this.viewing.cvSection1 === true) {
+			cvSection1.render(languageTemp);
 		}
 
-		if (this.viewing.cv2Section === true) {
-			CvSection2.render(languageTemp);
+		if (this.viewing.cvSection === true) {
+			// CvSection2.render(languageTemp);
 		}
 
 		if (this.viewing.certificatesSection === true) {
-			CertificatesSection.render(languageTemp);
+			certificatesSection.render(languageTemp);
 		}
 	}
 
@@ -208,31 +211,54 @@ class MainPage {
 		for (let i = this.content.navSections.length - 1; i >= 0; i--) {
 			this.content.navSections[i].addEventListener("mouseenter", () => {
 				if (this.content.navSections[i].className === "navSections navSectionL") {
+					this.content.navSections[i].style.height = "82px";
+					
 					if (!this.navOver.left) {
 						this.navOver.left = true;
 						this.toggleNavSectionL(this.navOver.left);
 					}
-					// document.querySelector(".navSectionLButton1").style.transform = "translateY(22px)";
-					// document.querySelector(".navSectionLButton2").style.transform = "translateY(42px)";
-					// document.querySelector(".navSectionLButton3").style.transform = "translateY(62px)";
-				} else {
 					
-					// console.log(this.content.navSections[i].className)
+				} else {
+					this.content.navSections[i].style.height = "62px";
+					if (!this.navOver.right) {
+						this.navOver.right = true;
+						this.toggleNavSectionR(this.navOver.right);
+					}
 				}
 			})
-
 			this.content.navSections[i].addEventListener("mouseleave", () => {
 				if (this.content.navSections[i].className === "navSections navSectionL") {
+					this.content.navSections[i].style.height = "18px";
+
 					if (this.navOver.left) {
 						this.navOver.left = false;
 						this.toggleNavSectionL(this.navOver.left);
 					}
-					// document.querySelector(".navSectionLButton1").style.transform = "translateY(0px)";
-					// document.querySelector(".navSectionLButton2").style.transform = "translateY(0px)";
-					// document.querySelector(".navSectionLButton3").style.transform = "translateY(0px)";
 				} else {
-					
-					// console.log(this.content.navSections[i].className)
+					if (this.navOver.right) {
+						this.navOver.right = false;
+						this.toggleNavSectionR(this.navOver.right);
+					}
+				}
+			})
+
+			this.content.navSections[i].addEventListener("touchend", () => {
+				if (this.content.navSections[i].className === "navSections navSectionL") {
+					if (!this.navOver.left) {
+						this.navOver.left = true;
+						this.toggleNavSectionL(this.navOver.left);
+					} else {
+						this.navOver.left = false;
+						this.toggleNavSectionL(this.navOver.left);
+					}
+				} else {
+					if (!this.navOver.right) {
+						this.navOver.right = true;
+						this.toggleNavSectionR(this.navOver.right);
+					} else {
+						this.navOver.right = false;
+						this.toggleNavSectionR(this.navOver.right);
+					}
 				}
 			})
 		}
@@ -243,12 +269,78 @@ class MainPage {
 			document.querySelector(".navSectionLButton1").style.transform = "translateY(22px)";
 			document.querySelector(".navSectionLButton2").style.transform = "translateY(42px)";
 			document.querySelector(".navSectionLButton3").style.transform = "translateY(62px)";
+
+			for (let i = 0; i < document.querySelectorAll(".navSectionLButton").length; i++) {
+				document.querySelectorAll(".navSectionLButton")[i].style.boxShadow = "0 0 4px 3px black";
+			}
 		}
 
 		if (!hovering) {
 			document.querySelector(".navSectionLButton1").style.transform = "translateY(0px)";
 			document.querySelector(".navSectionLButton2").style.transform = "translateY(0px)";
 			document.querySelector(".navSectionLButton3").style.transform = "translateY(0px)";
+
+			for (let i = 0; i < document.querySelectorAll(".navSectionLButton").length; i++) {
+				document.querySelectorAll(".navSectionLButton")[i].style.boxShadow = "none";
+			}
+		}
+	}
+
+	toggleNavSectionR(hovering) {
+		if (hovering) {
+			document.querySelector(".navSectionRButton1").style.transform = "translateY(22px)";
+			document.querySelector(".navSectionRButton2").style.transform = "translateY(42px)";
+
+			for (let i = 0; i < document.querySelectorAll(".navSectionRButton").length; i++) {
+				document.querySelectorAll(".navSectionRButton")[i].style.boxShadow = "0 0 4px 3px black";
+			}
+		}
+
+		if (!hovering) {
+			document.querySelector(".navSectionRButton1").style.transform = "translateY(0px)";
+			document.querySelector(".navSectionRButton2").style.transform = "translateY(0px)";
+
+			for (let i = 0; i < document.querySelectorAll(".navSectionRButton").length; i++) {
+				document.querySelectorAll(".navSectionRButton")[i].style.boxShadow = "none";
+			}
+		}
+	}
+
+	handleNavButtonsHover() {
+		for (let i = 0; i < this.content.navSectionButtonsL.length; i++) {
+			this.content.navSectionButtonsL[i].addEventListener("mouseenter", () => {
+				this.content.navSectionButtonsL[i].style.textShadow = "0 0 8px white";
+				this.content.navSectionButtonsL[i].style.color = "white";
+				this.content.navSectionButtonsL[i].style.fontSize = "14px";
+				this.content.navSectionButtonsL[i].style.lineHeight = "14px";
+			});
+		}
+
+		for (let i = 0; i < this.content.navSectionButtonsL.length; i++) {
+			this.content.navSectionButtonsL[i].addEventListener("mouseleave", () => {
+				this.content.navSectionButtonsL[i].style.textShadow = "none";
+				this.content.navSectionButtonsL[i].style.color = "#EEEEEE";
+				this.content.navSectionButtonsL[i].style.fontSize = "13px";
+				this.content.navSectionButtonsL[i].style.lineHeight = "13px";
+			});
+		}
+
+		for (let i = 0; i < this.content.navSectionButtonsR.length; i++) {
+			this.content.navSectionButtonsR[i].addEventListener("mouseenter", () => {
+				this.content.navSectionButtonsR[i].style.textShadow = "0 0 8px white";
+				this.content.navSectionButtonsR[i].style.color = "white";
+				this.content.navSectionButtonsR[i].style.fontSize = "14px";
+				this.content.navSectionButtonsR[i].style.lineHeight = "14px";
+			});
+		}
+
+		for (let i = 0; i < this.content.navSectionButtonsR.length; i++) {
+			this.content.navSectionButtonsR[i].addEventListener("mouseleave", () => {
+				this.content.navSectionButtonsR[i].style.textShadow = "none";
+				this.content.navSectionButtonsR[i].style.color = "#EEEEEE";
+				this.content.navSectionButtonsR[i].style.fontSize = "13px";
+				this.content.navSectionButtonsR[i].style.lineHeight = "13px";
+			});
 		}
 	}
 
@@ -267,8 +359,9 @@ class MainPage {
 
 		if (!this.pageDone) {
 			this.handleMiniIntro();
-		} else {
 			this.handleNavHover();
+			this.handleNavButtonsHover();
+		} else {
 			this.handleInitialPage();
 		}
 	}

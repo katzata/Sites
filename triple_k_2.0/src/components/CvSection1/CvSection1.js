@@ -6,11 +6,20 @@ class CvSection1 {
 	}
 
 	prepare() {
-		
+		const cvSection1 = document.createElement("section");
+		cvSection1.classList.add("cvSection1");
+
+
+		document.querySelector("main").appendChild(cvSection1);
+	}
+
+	handleThumbnails() {
+
 	}
 
 	render() {
-		console.log("x")
+		this.prepare();
+		// console.log("x")
 	}
 }
 

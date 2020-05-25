@@ -15,10 +15,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(png|ttf|woff|woff2)$/,
+				test: /\.(png|jpg|ttf|woff|woff2|pdf)$/,
 				loader: "file-loader",
 				options: {
 					outputPath: "assets",
+					name: '[name].[ext]'
 				},
 			},
 			{

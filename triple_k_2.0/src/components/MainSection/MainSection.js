@@ -1,5 +1,6 @@
 import "./MainSection.css";
 import Content from "../PageContent/PageContent";
+const kkk = require("../../assets/img/kkk.png");
 
 class MainSection {
 	constructor() {
@@ -9,7 +10,10 @@ class MainSection {
 		this.content = {
 			nav: undefined,
 			mainSection: undefined,
-			topArticle: undefined
+			topArticle: undefined,
+			topArticleTitle: undefined,
+			topArticleSubTitle: undefined,
+			topArticleText: undefined,
 		}
 	}
 
@@ -28,98 +32,126 @@ class MainSection {
 	}
 
 	prepare() {
+		const mainSection = document.createElement("section");
+		mainSection.classList.add("mainSection");
+		this.content.mainSection = mainSection;
+
+		this.prepareTopArticle(mainSection);
+		this.prepareBottomArticle(mainSection);
+
+		document.querySelector("main").appendChild(mainSection);
+
 		this.content.nav = document.querySelector("nav");
-		this.content.mainSection = document.querySelector(".mainSection");
 		this.content.topArticle = document.querySelector(".topArticle");
-		
-		this.content.nav.style.opacity = "1";
-		this.content.mainSection.style.backgroundColor = "rgba(0, 0, 0, .5)";
-		this.content.mainSection.style.overflowY = "auto";
-		this.content.mainSection.style.opacity = "1";
+
+		mainSection.style.backgroundColor = "rgba(0, 0, 0, .5)";
 		this.sectionDone = true;
 	}
 
-	prepareTopArticle() {
+	prepareTopArticle(mainSection) {
+		let content = [
+			[
+				this.text.mainSection.topArticle.name.title,
+				this.text.mainSection.topArticle.name.content
+			],
+			[
+				this.text.mainSection.topArticle.age.title,
+				this.text.mainSection.topArticle.age.content
+			],
+			[
+				this.text.mainSection.topArticle.location.title,
+				this.text.mainSection.topArticle.location.content
+			],
+			[
+				this.text.mainSection.topArticle.education.title,
+				this.text.mainSection.topArticle.education.content
+			]
+		];
+
+		const topArticleContainer = document.createElement("div");
+		topArticleContainer.classList.add("topArticleContainer");
+		this.content.topArticleContainer = topArticleContainer;
+
+		const topArticle = document.createElement("article");
+		topArticle.classList.add("topArticle");
+		this.content.topArticle = topArticle;
+
+		const topArticleTitle = document.createElement("div");
+		topArticleTitle.classList.add("topArticleTitle");
+		topArticle.appendChild(topArticleTitle);
+		this.content.topArticleTitle = topArticleTitle;
+		
+		for (let i = 0; i < 4; i++) {
+			let topArticleSubTitle = document.createElement("div");
+			topArticleSubTitle.classList.add("topArticleSubTitle", `topArticleSubTitle${i + 1}`);
+			
+			for (let j = 0; j < content[i][0].length; j++) {
+				let titleSpan = document.createElement("span");
+				titleSpan.textContent = content[i][0][j];
+				titleSpan.classList.add("topArticleLetters");
+
+				topArticleSubTitle.appendChild(titleSpan);
+			}
+
+			let topArticleText = document.createElement("div");
+			topArticleText.classList.add("topArticleText", `topArticleText${i + 1}`);
+
+			for (let j = 0; j < content[i][1].length; j++) {
+				let textSpan = document.createElement("span");
+				textSpan.textContent = content[i][1][j];
+				textSpan.classList.add("topArticleLetters");
+
+				topArticleText.appendChild(textSpan);
+			}
+
+			topArticle.appendChild(topArticleSubTitle);
+			topArticle.appendChild(topArticleText);
+		}
 		for (let i = 0; i < this.text.mainSection.topArticle.title.length; i++) {
 			let span = document.createElement("span");
 			span.textContent = this.text.mainSection.topArticle.title[i];
 			span.classList.add("topArticleLetters");
 
-			document.querySelector(".topArticleTitle").appendChild(span);
+			topArticleTitle.appendChild(span);
 		}
 
-		for (let i = 0; i < this.text.mainSection.topArticle.name.title.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.name.title[i];
-			span.classList.add("topArticleLetters");
+		this.content.topArticleSubTitle = document.querySelectorAll(".topArticleSubTitle");
+		this.content.topArticleText = document.querySelectorAll(".topArticleText");
 
-			document.querySelector(".topArticleSubTitle1").appendChild(span);
-		}
+		const topArticleImgContainer = document.createElement("div");
+		topArticleImgContainer.classList.add("topArticleImgContainer");
+		this.content.topArticleImgContainer = topArticleImgContainer;
 
-		for (let i = 0; i < this.text.mainSection.topArticle.name.content.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.name.content[i];
-			span.classList.add("topArticleLetters");
+		const topArticleImg = document.createElement("img");
+		topArticleImg.classList.add("topArticleImg");
+		topArticleImg.src = kkk.default;
+		topArticleImgContainer.appendChild(topArticleImg);
+		this.content.topArticleImg = topArticleImg;
 
-			document.querySelector(".topArticleText1").appendChild(span);
-		}
-
-		for (let i = 0; i < this.text.mainSection.topArticle.age.title.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.age.title[i];
-			span.classList.add("topArticleLetters");
-
-			document.querySelector(".topArticleSubTitle2").appendChild(span);
-		}
-
-		for (let i = 0; i < this.text.mainSection.topArticle.age.content.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.age.content[i];
-			span.classList.add("topArticleLetters");
-
-			document.querySelector(".topArticleText2").appendChild(span);
-		}
-
-		for (let i = 0; i < this.text.mainSection.topArticle.location.title.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.location.title[i];
-			span.classList.add("topArticleLetters");
-
-			document.querySelector(".topArticleSubTitle3").appendChild(span);
-		}
-
-		for (let i = 0; i < this.text.mainSection.topArticle.location.content.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.location.content[i];
-			span.classList.add("topArticleLetters");
-
-			document.querySelector(".topArticleText3").appendChild(span);
-		}
-
-		for (let i = 0; i < this.text.mainSection.topArticle.education.title.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.education.title[i];
-			span.classList.add("topArticleLetters");
-
-			document.querySelector(".topArticleSubTitle4").appendChild(span);
-		}
-
-		for (let i = 0; i < this.text.mainSection.topArticle.education.content.length; i++) {
-			let span = document.createElement("span");
-			span.textContent = this.text.mainSection.topArticle.education.content[i];
-			span.classList.add("topArticleLetters");
-
-			document.querySelector(".topArticleText4").appendChild(span);
-		}
+		topArticleContainer.appendChild(topArticle);
+		topArticleContainer.appendChild(topArticleImgContainer);
+		this.content.mainSection.appendChild(topArticleContainer);
 	}
 
-	prepareBottomArticle() {
+	prepareBottomArticle(mainSection) {
+		const bottomArticle = document.createElement("section");
+		bottomArticle.classList.add("bottomArticle");
+		this.content.bottomArticle = bottomArticle;
+
+		const bottomArticleTitle = document.createElement("div");
+		bottomArticleTitle.classList.add("bottomArticleTitle");
+		this.content.bottomArticleTitle = bottomArticleTitle;
+
+		const bottomArticleText = document.createElement("div");
+		bottomArticleText.classList.add("bottomArticleText");
+		this.content.bottomArticleText = bottomArticleText;
+
 		for (let i = 0; i < this.text.mainSection.bottomArticle.title.length; i++) {
 			let span = document.createElement("span");
 			span.textContent = this.text.mainSection.bottomArticle.title[i];
 			span.classList.add("bottomArticleLetters");
 
-			document.querySelector(".bottomArticleTitle").appendChild(span);
+			bottomArticleTitle.appendChild(span);
 		}
 
 		for (let i = 0; i < this.text.mainSection.bottomArticle.content.length; i++) {
@@ -127,8 +159,12 @@ class MainSection {
 			span.textContent = this.text.mainSection.bottomArticle.content[i];
 			span.classList.add("bottomArticleLetters");
 
-			document.querySelector(".bottomArticleText").appendChild(span);
+			bottomArticleText.appendChild(span);
 		}
+
+		bottomArticle.appendChild(bottomArticleTitle);
+		bottomArticle.appendChild(bottomArticleText);
+		this.content.mainSection.appendChild(bottomArticle);
 	}
 
 	toggleOpacity() {
@@ -153,19 +189,22 @@ class MainSection {
 
 	render(languageTemp) {
 		if (!this.sectionDone) {
-			this.prepare();
 			this.setLanguage(languageTemp);
-			this.prepareTopArticle();
-			this.prepareBottomArticle();
-			
+			this.prepare();
 		} else {
-			this.content.mainSection.style.transitionDuration = "0";
+			document.querySelector(".mainSection").style.opacity = "1";
+			// this.content.mainSection.style.transitionDuration = "0";
 		}
 
 		this.setLanguage("en");
-		
+		window.onclick = () => {
+			console.log("x")
+			document.querySelector(".mainSection").style.opacity = "1";
+		}
 		// console.log(this.text.mainSection.topArticle);
 	}
 }
+
+
 
 export default MainSection;
