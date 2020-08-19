@@ -1,21 +1,22 @@
 nav {
 	position: absolute;
 	bottom: 0px;
-	width: 320px;
+	width: 290px;
 	height: 20px;
-	display: flex;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: 115px 60px 115px;
+	justify-items: center;
 	color: white;
 	transform: translateY(50%);
 	transition-duration: 1s;
 	opacity: 0;
 	user-select: none;
-	z-index: 1;
+	z-index: 4;
 }
 
 .navSectionL, .navSectionR {
 	position: relative;
-	width: 35%;
+	width: 100%;
 	height: 18px;
 	display: flex;
 	flex-direction: column;
@@ -23,17 +24,12 @@ nav {
 	text-align: center;
 }
 
-.navSectionR {
-	height: 60px;
-	margin-left: 70px;
-}
-
 .navSectionTitle {
 	position: relative;
 	width: 100%;
 	display: inline-block;
 	font-family: "SpectralSC-light";
-	font-size: 1.1em;
+	font-size: 1em;
 	line-height: 1em;
 	background-color: black;
 	box-shadow: 0 0 8px 5px black;
@@ -44,9 +40,9 @@ nav {
 .navSectionLButton, .navSectionRButton {
 	position: absolute;
 	top: 0;
-	height: 14px;
 	margin: 3px 0;
-	padding: 0;
+	padding: 0 2px;
+	display: flex;
 	font-family: SpectralSC-Regular;
 	color: #EEEEEE;
 	font-size: 13px;
@@ -78,20 +74,25 @@ nav {
 	z-index: 0;
 }
 
-.buttonSpan {
-	margin: 0 2px;
-}
-
 .navButtonMain {
-	position: absolute;
-	left: 50%;
-	bottom: -70%;
-	width: 58px;
+	width: 60px;
 	height: 22px;
+	padding: 0;
+	margin: 0;
 	color: white;
 	font-family: "SpectralSC-light";
 	font-size: 15px;
 	background-color: rgba(0, 0, 0, 0);
-	transform: translateX(-50%);
+	transform: translateY(60%);
 	border: none;
+}
+
+.navButtonMain:focus {
+	outline: none;
+}
+
+@media only screen and (max-width: 414px) {
+	.navSectionTitle {
+		font-size: 1em;
+	}
 }

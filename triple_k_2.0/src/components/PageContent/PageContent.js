@@ -1,9 +1,9 @@
 let getAge = () => {
-	let ageDifMs = Date.now() - new Date(1985, 4, 3).getTime();
-	let ageDate = new Date(ageDifMs);
+	let age = Date.now() - new Date(1985, 4, 3).getTime();
+	let ageDate = new Date(age);
 
 	return Math.abs(ageDate.getUTCFullYear() - 1970).toString();
-}
+};
 
 module.exports = {
 	en: {
@@ -48,6 +48,15 @@ module.exports = {
 					eos quos labore at, ducimus. Debitis quis perspiciatis doloremque qui reprehenderit consectetur quae, accusantium laborum illum!
 				`
 			}
+		},
+		certificatesSection: {
+			titles: [
+				"Front End Course",
+				"Modern JavaScript Course",
+				"PHP Course",
+				"Webpack Course"
+			],
+			button: "EXIT"
 		}
 	},
 	bg: {
@@ -92,6 +101,15 @@ module.exports = {
 					eos quos labore at, ducimus. Debitis quis perspiciatis doloremque qui reprehenderit consectetur quae, accusantium laborum illum!
 				`
 			}
+		},
+		certificatesSection: {
+			titles: [
+				"Front End Курс",
+				"Modern JavaScript Курс",
+				"PHP Курс",
+				"Webpack Курс"
+			],
+			button: "ИЗХОД"
 		}
 	},
 	it: {
@@ -136,6 +154,43 @@ module.exports = {
 					eos quos labore at, ducimus. Debitis quis perspiciatis doloremque qui reprehenderit consectetur quae, accusantium laborum illum!
 				`
 			}
+		},
+		certificatesSection: {
+			titles: [
+				"Corso di Front End",
+				"Corso di Modern JavaScript",
+				"Corso di PHP",
+				"Corso di Webpack"
+			],
+			button: "ESCI"
 		}
+	},
+	icons: {
+		titles: [
+			"HTML",
+			"CSS",
+			"Sass",
+			"Bootstrap",
+			"JavaScript",
+			"jQuery",
+			"Pixi.js",
+			"React",
+			"webpack",
+			"Node.js",
+			"Git",
+		],
+		src: [
+			"../assets/icons/html.svg", 
+			"../assets/icons/css.svg",
+			"../assets/icons/sass.svg",
+			"../assets/icons/bootstrap.svg",
+			"../assets/icons/js.svg",
+			"../assets/icons/jquery.svg",
+			"../assets/icons/pixi.svg", 
+			"../assets/icons/react.svg",
+			"../assets/icons/webpack.svg",
+			"../assets/icons/nodejs.svg",
+			"../assets/icons/git.svg"
+		]
 	}
 }

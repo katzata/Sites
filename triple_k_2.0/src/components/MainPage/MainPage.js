@@ -2,6 +2,7 @@ import "./MainPage.css";
 import Content from "../PageContent/PageContent";
 import MainSection from "../MainSection/MainSection";
 import CvSection1 from "../CvSection1/CvSection1";
+import CvSection from "../CvSection1/CvSection1";
 import CertificatesSection from "../CertificatesSection/CertificatesSection";
 
 let canvas;
@@ -44,7 +45,7 @@ class MainPage {
 			navSections: document.querySelectorAll(".navSections"),
 			navSectionL: document.querySelector(".navSectionL"),
 			navSectionR: document.querySelector(".navSectionR"),
-			navSectionButtonsL: document.querySelectorAll(".navSectionLButton"),
+			navButtonsL: document.querySelectorAll(".navSectionLButton"),
 			navSectionButtonsR: document.querySelectorAll(".navSectionRButton"),
 			hrTop: document.querySelector(".hrTop"),
 			mainSection: document.querySelector(".mainSection"),
@@ -56,11 +57,6 @@ class MainPage {
 		this.navOver = {
 			left: false,
 			right: false
-		}
-
-		this.navHeights = {
-			left: 20,
-			right: 20
 		}
 		
 		this.crack = {
@@ -87,15 +83,45 @@ class MainPage {
 			mainSection: false,
 			cvSection1: false,
 			cvSection2: false,
-			certificatesSection: true
+			certificatesSection: true,
+			changing: false
 		}
 	}
 
 	prepare() {
 		canvas = document.querySelector("canvas");
 		ctx = canvas.getContext('2d');
+		
+		this.content.main.addEventListener("transitionend", () => {
+			if (this.content.main.style.opacity === "0") {
+				console.log(this.content.main)
+				this.content.main.removeChild(this.content.main.childNodes[0]);
+			}
+		})
 
+		for (let i = 0;  i < this.content.navButtonsL.length; i++) {
+			this.content.navButtonsL[i].addEventListener("click", () => {
+				if (!this.viewing.changing) {
+					this.viewing.changing = true;
+					this.content.main.style.opacity = "0";
 
+					this.handleNavClick(this.content.navButtonsL[i].className);
+					console.log(this.content.navButtonsL[i].className)
+				}
+			})
+		}
+
+		for (let i = 0;  i < this.content.navSectionButtonsR.length; i++) {
+			this.content.navSectionButtonsR[i].addEventListener("click", () => {
+				if (!this.viewing.changing) {
+					this.viewing.changing = true;
+					this.content.main.style.opacity = "0";
+
+					this.handleNavClick(this.content.navSectionButtonsR[i]);
+					console.log(this.content.navButtonsL[i].className)
+				}
+			})
+		}
 
 		this.content.footerText.appendChild(document.createTextNode(`Copywright © ${new Date().getFullYear()}`));
 	}
@@ -103,16 +129,6 @@ class MainPage {
 	// handlePageWidth() {
 	// 	document.querySelector(".mainSection").style.width = `${window.innerWidth + 17}px`
 	// }
-
-	prepareNavButtons() {
-		for (let i = 0; i < document.querySelectorAll(".navSectionLButton").length; i++) {
-			document.querySelectorAll(".navSectionLButton").addEventListener("transitionend", () => {
-				// if () {
-
-				// }
-			})
-		}
-	}
 
 	handleCanvas() {
 		canvas.width = window.innerWidth;
@@ -179,7 +195,7 @@ class MainPage {
 		}
 	}
 
-	handleInitialPage() {
+	handleSections() {
 		let languageTemp;
 
 		if (this.language.en === true) {
@@ -220,12 +236,14 @@ class MainPage {
 					
 				} else {
 					this.content.navSections[i].style.height = "62px";
+
 					if (!this.navOver.right) {
 						this.navOver.right = true;
 						this.toggleNavSectionR(this.navOver.right);
 					}
 				}
 			})
+
 			this.content.navSections[i].addEventListener("mouseleave", () => {
 				if (this.content.navSections[i].className === "navSections navSectionL") {
 					this.content.navSections[i].style.height = "18px";
@@ -235,6 +253,8 @@ class MainPage {
 						this.toggleNavSectionL(this.navOver.left);
 					}
 				} else {
+					this.content.navSections[i].style.height = "18px";
+
 					if (this.navOver.right) {
 						this.navOver.right = false;
 						this.toggleNavSectionR(this.navOver.right);
@@ -264,6 +284,79 @@ class MainPage {
 		}
 	}
 
+	handleNavButtonsHover() {
+		for (let i = 0; i < this.content.navButtonsL.length; i++) {
+			this.content.navButtonsL[i].addEventListener("mouseenter", () => {
+				this.content.navButtonsL[i].style.textShadow = "0 0 8px white";
+				this.content.navButtonsL[i].style.color = "white";
+				this.content.navButtonsL[i].style.fontSize = "14px";
+				this.content.navButtonsL[i].style.lineHeight = "14px";
+			});
+		}
+
+		for (let i = 0; i < this.content.navButtonsL.length; i++) {
+			this.content.navButtonsL[i].addEventListener("mouseleave", () => {
+				this.content.navButtonsL[i].style.textShadow = "none";
+				this.content.navButtonsL[i].style.color = "#EEEEEE";
+				this.content.navButtonsL[i].style.fontSize = "13px";
+				this.content.navButtonsL[i].style.lineHeight = "13px";
+			});
+		}
+
+		for (let i = 0; i < this.content.navSectionButtonsR.length; i++) {
+			this.content.navSectionButtonsR[i].addEventListener("mouseenter", () => {
+				this.content.navSectionButtonsR[i].style.textShadow = "0 0 8px white";
+				this.content.navSectionButtonsR[i].style.color = "white";
+				this.content.navSectionButtonsR[i].style.fontSize = "14px";
+				this.content.navSectionButtonsR[i].style.lineHeight = "14px";
+			});
+		}
+
+		for (let i = 0; i < this.content.navSectionButtonsR.length; i++) {
+			this.content.navSectionButtonsR[i].addEventListener("mouseleave", () => {
+				this.content.navSectionButtonsR[i].style.textShadow = "none";
+				this.content.navSectionButtonsR[i].style.color = "#EEEEEE";
+				this.content.navSectionButtonsR[i].style.fontSize = "13px";
+				this.content.navSectionButtonsR[i].style.lineHeight = "13px";
+			});
+		}
+	}
+
+	handleNavClick(button) {
+		if (button.className === "navSectionLButton navSectionLButton1") {
+			this.changeSections("cvSection1");
+		}
+		
+		if (button.className === "navSectionLButton navSectionLButton2") {
+			this.changeSections("cvSection2");
+		}
+
+		if (button.className === "navSectionLButton navSectionLButton3") {
+			this.changeSections("certificatesSection");
+		}
+
+		// if (button.className === "navSectionRButton navSectionRButton1") {
+		// 	this.changeSections("cvSection1");
+		// }
+		
+		if (button.className === "navSectionRButton navSectionRButton2") {
+			// this.changeSections("cvSection2");
+			console.log("projects")
+		}
+	}
+
+	changeSections(section) {
+		for (let i = 0;  i < Object.values(this.viewing).length; i++) {
+			if (Object.keys(this.viewing)[i] === section) {
+				Object.values(this.viewing)[i] = true;
+			} else {
+				Object.values(this.viewing)[i] = false;
+			}
+		}
+
+		this.handleSections(section);
+	}
+
 	toggleNavSectionL(hovering) {
 		if (hovering) {
 			document.querySelector(".navSectionLButton1").style.transform = "translateY(22px)";
@@ -271,7 +364,7 @@ class MainPage {
 			document.querySelector(".navSectionLButton3").style.transform = "translateY(62px)";
 
 			for (let i = 0; i < document.querySelectorAll(".navSectionLButton").length; i++) {
-				document.querySelectorAll(".navSectionLButton")[i].style.boxShadow = "0 0 4px 3px black";
+				document.querySelectorAll(".navSectionLButton")[i].style.boxShadow = "0 0 5px 3px black";
 			}
 		}
 
@@ -306,44 +399,6 @@ class MainPage {
 		}
 	}
 
-	handleNavButtonsHover() {
-		for (let i = 0; i < this.content.navSectionButtonsL.length; i++) {
-			this.content.navSectionButtonsL[i].addEventListener("mouseenter", () => {
-				this.content.navSectionButtonsL[i].style.textShadow = "0 0 8px white";
-				this.content.navSectionButtonsL[i].style.color = "white";
-				this.content.navSectionButtonsL[i].style.fontSize = "14px";
-				this.content.navSectionButtonsL[i].style.lineHeight = "14px";
-			});
-		}
-
-		for (let i = 0; i < this.content.navSectionButtonsL.length; i++) {
-			this.content.navSectionButtonsL[i].addEventListener("mouseleave", () => {
-				this.content.navSectionButtonsL[i].style.textShadow = "none";
-				this.content.navSectionButtonsL[i].style.color = "#EEEEEE";
-				this.content.navSectionButtonsL[i].style.fontSize = "13px";
-				this.content.navSectionButtonsL[i].style.lineHeight = "13px";
-			});
-		}
-
-		for (let i = 0; i < this.content.navSectionButtonsR.length; i++) {
-			this.content.navSectionButtonsR[i].addEventListener("mouseenter", () => {
-				this.content.navSectionButtonsR[i].style.textShadow = "0 0 8px white";
-				this.content.navSectionButtonsR[i].style.color = "white";
-				this.content.navSectionButtonsR[i].style.fontSize = "14px";
-				this.content.navSectionButtonsR[i].style.lineHeight = "14px";
-			});
-		}
-
-		for (let i = 0; i < this.content.navSectionButtonsR.length; i++) {
-			this.content.navSectionButtonsR[i].addEventListener("mouseleave", () => {
-				this.content.navSectionButtonsR[i].style.textShadow = "none";
-				this.content.navSectionButtonsR[i].style.color = "#EEEEEE";
-				this.content.navSectionButtonsR[i].style.fontSize = "13px";
-				this.content.navSectionButtonsR[i].style.lineHeight = "13px";
-			});
-		}
-	}
-
 	render() {
 		if (!this.pagePrepared) {
 			this.prepare();
@@ -354,16 +409,17 @@ class MainPage {
 			// this.handlePageWidth();
 		}
 
-		this.handleCanvas();
-		this.handleCrack();
-
 		if (!this.pageDone) {
 			this.handleMiniIntro();
 			this.handleNavHover();
 			this.handleNavButtonsHover();
+			// certificatesSection.prepare();
 		} else {
-			this.handleInitialPage();
+			this.handleSections();
 		}
+
+		this.handleCanvas();
+		this.handleCrack();
 	}
 }
 
